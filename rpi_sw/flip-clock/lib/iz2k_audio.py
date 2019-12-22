@@ -69,6 +69,7 @@ class sound:
 		retval = False
 		if self.volume >= self.volume_step:
 			self.volume -= self.volume_step
+			self.play('beep')
 			retval=True
 		self.update_volume()
 		return retval
