@@ -1,0 +1,166 @@
+<radio_stations>
+	<station>
+		<freq>97.2</freq>
+		<name>Los 40 principales</name>
+	</station>
+	<station>
+		<freq>88.5</freq>
+		<name>COPE</name>
+	</station>
+	<station>
+		<freq>91.5</freq>
+		<name>Kiss FM</name>
+	</station>
+	<station>
+		<freq>87.6</freq>
+		<name>Radio Nacional</name>
+	</station>
+	<!--station>
+		<freq>90</freq>
+		<name>RNE Clásica</name>
+	</station-->
+	<station>
+		<freq>90.5</freq>
+		<name>Radio Euskadi</name>
+	</station>
+	<station>
+		<freq>90.9</freq>
+		<name>EITB Música</name>
+	</station>
+	<!--station>
+		<freq>92.1</freq>
+		<name>Radio 3</name>
+	</station-->
+	<!--station>
+		<freq>92.9</freq>
+		<name>Radio Marca</name>
+	</station-->
+	<station>
+		<freq>93.3</freq>
+		<name>Radio 5</name>
+	</station>
+	<!--station>
+		<freq>93.8</freq>
+		<name>Enjoy FM</name>
+	</station-->
+	<!--station>
+		<freq>94.4</freq>
+		<name>Euskadi Irratia</name>
+	</station-->
+	<!--station>
+		<freq>94.8</freq>
+		<name>Onda vasca</name>
+	</station-->
+	<station>
+		<freq>95.2</freq>
+		<name>Euskadi Irratia</name>
+	</station>
+	<station>
+		<freq>95.6</freq>
+		<name>Onda vasca</name>
+	</station>
+	<!--station>
+		<freq>95.9</freq>
+		<name>Europa FM</name>
+	</station-->
+	<station>
+		<freq>96.5</freq>
+		<name>Radio Euskadi</name>
+	</station>
+	<!--station>
+		<freq>97.6</freq>
+		<name>Radio María</name>
+	</station-->
+	<station>
+		<freq>98.0</freq>
+		<name>COPE más</name>
+	</station>
+	<station>
+		<freq>98.5</freq>
+		<name>Radio Donosti</name>
+	</station>
+	<station>
+		<freq>98.9</freq>
+		<name>Radio 3</name>
+	</station>
+	<station>
+		<freq>99.2</freq>
+		<name>Info zazpi</name>
+	</station>
+	<!--station>
+		<freq>99.5</freq>
+		<name>RNE Clásica</name>
+	</station-->
+	<!--station>
+		<freq>99.8</freq>
+		<name>Rock FM</name>
+	</station-->
+	<!--station>
+		<freq>101.2</freq>
+		<name>Radio Hi</name>
+	</station-->
+	<station>
+		<freq>101.5</freq>
+		<name>Radio Trópical</name>
+	</station>
+	<station>
+		<freq>102</freq>
+		<name>SER</name>
+	</station>
+	<!--station>
+		<freq>102.2</freq>
+		<name>Radio solidaria</name>
+	</station-->
+	<station>
+		<freq>102.5</freq>
+		<name>Onda Cero</name>
+	</station>
+	<!--station>
+		<freq>103.1</freq>
+		<name>Gaztea</name>
+	</station-->
+	<station>
+		<freq>103.5</freq>
+		<name>Gaztea</name>
+	</station>
+	<!--station>
+		<freq>104.2</freq>
+		<name>EITB Música</name>
+	</station-->
+	<!--station>
+		<freq>104.7</freq>
+		<name>Radio Nacional</name>
+	</station-->
+	<!--station>
+		<freq>105</freq>
+		<name>es radio</name>
+	</station-->
+	<!--station>
+		<freq>105.2</freq>
+		<name>Cadena dial</name>
+	</station-->
+	<station>
+		<freq>106.2</freq>
+		<name>Cadena 100</name>
+	</station>
+	<!--station>
+		<freq>106.5</freq>
+		<name>Hit FM</name>
+	</station-->
+	<!--station>
+		<freq>107.2</freq>
+		<name>ttan ttakun</name>
+	</station-->
+	<!--station>
+		<freq>107.4</freq>
+		<name>Casares</name>
+	</station-->
+	<!--station>
+		<freq>107.7</freq>
+		<name>Ochoqui</name>
+	</station-->
+	<!--station>
+		<freq>108</freq>
+		<name>Radio 4G</name>
+	</station-->
+</radio_stations>
