@@ -27,13 +27,12 @@ class neoled:
 
 	# Define functions which animate LEDs in various ways.	
 	def colorFill(self, color):
-		#color=rgbw2color(rgbw)
+		"""Fill strip with color at once."""
 		for i in range(self.strip.numPixels()):
 			self.strip.setPixelColor(i, color)
 		self.strip.show()
 		
 	def colorWipe(self, color, wait_ms=10):
-		#color=rgbw2color(rgbw)
 		"""Wipe color across display a pixel at a time."""
 		for i in range(self.strip.numPixels()):
 			self.strip.setPixelColor(i, color)
@@ -47,7 +46,69 @@ class neoled:
 			self.colorFill(Color(0,0,0,0))
 			if i < (nblinks-1):
 				time.sleep(blink_ms / 1000.0)
-			
+	
+	def multColor(self, color, multiplier):
+		white = (color >> 24) & 0xFF
+		red = (color >> 16) & 0xFF
+		green = (color >> 8) & 0xFF
+		blue = color & 0xFF
+		return Color(int(red*multiplier), int(green*multiplier), int(blue*multiplier), int(white*multiplier))
+	
+	def dualbulb(self, color, pos):
+		dualbulb_pattern = {
+				0:0.1,
+				1:0.2,
+				2:0.5,
+				3:1,
+				4:0.5,
+				5:0.2,
+				6:0.5,
+				7:1,
+				8:0.5,
+				9:0.2,
+				10:0.1,
+				11:0.2,
+				12:0.5,
+				13:1,
+				14:0.5,
+				15:0.2,
+			}
+		return self.multColor(color, dualbulb_pattern[pos%16])
+		
+	def nightlight(self, color):
+		wait_ms=25
+		# Ramp UP 0-0.5
+		s=0
+		for j in range(10):
+			s += 0.05
+			for i in range(self.strip.numPixels()):
+				self.strip.setPixelColor(i, self.multColor(self.dualbulb(color, i), s))
+			self.strip.show()
+			time.sleep(wait_ms / 1000.0)
+		for c in range(5):
+			# Ramp UP 0.5-1
+			s=0.5
+			for j in range(10):
+				s += 0.05
+				for i in range(self.strip.numPixels()):
+					self.strip.setPixelColor(i, self.multColor(self.dualbulb(color, i+c), s))
+				self.strip.show()
+				time.sleep(wait_ms / 1000.0)
+			# Ramp DOWN 1-05
+			for j in range(10):
+				s -= 0.05
+				for i in range(self.strip.numPixels()):
+					self.strip.setPixelColor(i, self.multColor(self.dualbulb(color, i+c), s))
+				self.strip.show()
+				time.sleep(wait_ms / 1000.0)
+		# Ramp DOWN 0.5-0
+		for j in range(10):
+			s -= 0.05
+			for i in range(self.strip.numPixels()):
+				self.strip.setPixelColor(i, self.multColor(self.dualbulb(color, i), s))
+			self.strip.show()
+			time.sleep(wait_ms / 1000.0)
+		self.colorFill(Color(0,0,0))
 
 	def wheel(self, pos):
 		"""Generate rainbow colors across 0-255 positions."""
