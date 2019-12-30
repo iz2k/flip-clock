@@ -46,6 +46,19 @@ class neoled:
 			self.colorFill(Color(0,0,0,0))
 			if i < (nblinks-1):
 				time.sleep(blink_ms / 1000.0)
+				
+	def colorBlinkPos(self, color, blink_ms=30, nblinks=1, pos=0):
+		for i in range(nblinks):
+			for i in range(self.strip.numPixels()):
+				if ((i+pos)%7 == 0):
+					self.strip.setPixelColor(i, color)
+				else:
+					self.strip.setPixelColor(i, Color(0,0,0,0))
+			self.strip.show()			
+			time.sleep(blink_ms / 1000.0)
+			self.colorFill(Color(0,0,0,0))
+			if i < (nblinks-1):
+				time.sleep(blink_ms / 1000.0)
 	
 	def multColor(self, color, multiplier):
 		white = (color >> 24) & 0xFF

@@ -35,7 +35,6 @@ class radio:
 		cmd = shlex.split('mplayer -ao alsa -af volume=10 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' 
 					+ self.radio_stations_name[self.current_radio_station] + '&tl=es"')
 		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-		time.sleep(1)
 		
 		# Synthonize radio
 		cmd=shlex.split('softfm -f ' + self.radio_stations_freq[self.current_radio_station] + 'M')

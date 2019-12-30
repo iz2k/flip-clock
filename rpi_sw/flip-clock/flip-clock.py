@@ -4,6 +4,7 @@ import time
 from rpi_ws281x import Color
 from lib import iz2k_io
 from lib import iz2k_audio
+from lib import iz2k_spotify
 from lib import iz2k_radio
 from lib import iz2k_led
 from lib import iz2k_clock
@@ -13,10 +14,10 @@ from lib import iz2k_config
 def vol_rotary_callback(direction):	
 	if direction is 1:
 		if sound.volume_up():
-			strip.colorBlink(color=Color(0,50,0))
+			strip.colorBlinkPos(color=Color(0,50,0), pos=sound.volume/sound.volume_step)
 	if direction is -1:
 		if sound.volume_down():
-			strip.colorBlink(color=Color(0,0,50))	
+			strip.colorBlinkPos(color=Color(0,0,50), pos=sound.volume/sound.volume_step)	
 
 def vol_sw_short():
 	print("[UI] VOL pressed SHORT")
@@ -30,7 +31,13 @@ def ctrl_rotary_callback(direction):
 	global status
 	print("[UI] CTRL_ROTARY:", direction)
 	
-	if status == 'radio':
+	if status == 'spotify':
+		sound.play('source')
+		if direction == -1:
+			spotify.previous_track()
+		elif direction == 1:
+			spotify.next_track()
+	elif status == 'radio':
 		sound.play('source')
 		if direction == -1:
 			radio.previous_station()
@@ -45,7 +52,12 @@ def ctrl_sw_long():
 	print("[UI] CTRL pressed LONG")
 	if status == 'idle':
 		sound.play('on')
-		status='radio'
+		status='spotify'
+		spotify.play_list('spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p')
+	elif status == 'spotify':
+		sound.play('on')
+		status = 'radio'
+		spotify.kill_spotify()
 		radio.play_radio()
 	elif status == 'radio':
 		sound.play('off')
@@ -65,6 +77,9 @@ status='idle'
 
 # Create audio controler
 sound = iz2k_audio.sound()
+
+# Create spotify controller
+spotify = iz2k_spotify.spotify()
 
 # Create radio controller
 radio = iz2k_radio.radio()
