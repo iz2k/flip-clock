@@ -1,0 +1,141 @@
+<doctype html>
+<head>
+    <title>Alarm</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<div class="topnav">
+  <a href="/radio">Radio</a>
+  <a class="active"  href="/alarm">Alarms</a>
+  <a href="http://flip-clock-pi:6680/iris/">Mopidy</a>
+</div>
+
+<h2>Alarm configuration</h2>
+
+<p><p>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% from "_formhelpers.html" import render_field_raw, render_field %}
+  Add new Alarm:
+    <form method=post>
+        <table border="1px">
+            <td>
+        <table>
+            <tr>
+                {{ render_field(aformnew.name) }}
+                {{ render_field(aformnew.hour) }}
+                {{ render_field(aformnew.minute) }}
+            </tr>
+            <tr>
+                {{ render_field(aformnew.alarm_period_enable) }}
+                <td colspan="6">
+                <table>
+                    {{ render_field(aformnew.alarm_period_monday) }}
+                    {{ render_field(aformnew.alarm_period_tuesday) }}
+                    {{ render_field(aformnew.alarm_period_wednesday) }}
+                    {{ render_field(aformnew.alarm_period_thursday) }}
+                    {{ render_field(aformnew.alarm_period_friday) }}
+                    {{ render_field(aformnew.alarm_period_saturday) }}
+                    {{ render_field(aformnew.alarm_period_sunday) }}
+                </table>
+                </td>
+            </tr>
+            <tr>
+                {{ render_field(aformnew.alarm_src_type) }}
+                {{ render_field(aformnew.alarm_src_item) }}
+                {{ render_field(aformnew.alarm_src_random) }}
+            </tr>
+            <tr>
+                {{ render_field(aformnew.alarm_vol_start) }}
+                {{ render_field(aformnew.alarm_vol_end) }}
+                {{ render_field(aformnew.alarm_vol_ramptime) }}
+            </tr>
+            <tr>
+                {{ render_field(aformnew.alarm_snz_enable) }}
+                {{ render_field(aformnew.alarm_snz_time) }}
+            </tr>
+            <tr>
+                {{ render_field(aformnew.alarm_wth_enable) }}
+                {{ render_field(aformnew.alarm_wth_greeting) }}
+                {{ render_field(aformnew.alarm_wth_delay) }}
+                {{ render_field_raw(aformnew.idx) }}
+            </tr>
+        </table>
+        </td>
+            <tr>
+                <td>
+                    {{ render_field_raw(aformnew.new) }}
+                </td>
+            </tr>
+        </table>
+    </form>
+  Stored Alarms:
+<ul style="list-style-type:none;">
+  <!-- For loop logic of jinja template -->
+{%for i in range(0, nalarms)%}
+    <li>
+    <form method=post>
+        <table border="1px">
+            <td>
+        <table>
+            <tr>
+       {{ render_field(aforms[i].name) }}
+       {{ render_field(aforms[i].hour) }}
+       {{ render_field(aforms[i].minute) }}
+            </tr>
+            <tr>
+       {{ render_field(aforms[i].alarm_period_enable) }}
+                <td colspan="6">
+                <table>
+                   {{ render_field(aforms[i].alarm_period_monday) }}
+                   {{ render_field(aforms[i].alarm_period_tuesday) }}
+                   {{ render_field(aforms[i].alarm_period_wednesday) }}
+                   {{ render_field(aforms[i].alarm_period_thursday) }}
+                   {{ render_field(aforms[i].alarm_period_friday) }}
+                   {{ render_field(aforms[i].alarm_period_saturday) }}
+                   {{ render_field(aforms[i].alarm_period_sunday) }}
+                </table>
+                </td>
+            </tr>
+            <tr>
+       {{ render_field(aforms[i].alarm_src_type) }}
+       {{ render_field(aforms[i].alarm_src_item) }}
+       {{ render_field(aforms[i].alarm_src_random) }}
+            </tr>
+            <tr>
+       {{ render_field(aforms[i].alarm_vol_start) }}
+       {{ render_field(aforms[i].alarm_vol_end) }}
+       {{ render_field(aforms[i].alarm_vol_ramptime) }}
+            </tr>
+            <tr>
+       {{ render_field(aforms[i].alarm_snz_enable) }}
+       {{ render_field(aforms[i].alarm_snz_time) }}
+            </tr>
+            <tr>
+       {{ render_field(aforms[i].alarm_wth_enable) }}
+       {{ render_field(aforms[i].alarm_wth_greeting) }}
+       {{ render_field(aforms[i].alarm_wth_delay) }}
+       {{ render_field_raw(aforms[i].idx) }}
+            </tr>
+        </table>
+        </td>
+            <tr>
+                <td>
+                    {{ render_field_raw(aforms[i].update) }}
+                    {{ render_field_raw(aforms[i].delete) }}
+                </td>
+            </tr>
+        </table>
+    </form>
+    </li>
+{%endfor%}
+</ul>

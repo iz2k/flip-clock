@@ -1,0 +1,36 @@
+<alarms>
+  <alarm>
+    <name>Wake up</name>
+    <hour>7</hour>
+    <minute>10</minute>
+    <periodic>
+      <enable>True</enable>
+      <monday>True</monday>
+      <tuesday>True</tuesday>
+      <wednesday>True</wednesday>
+      <thursday>True</thursday>
+      <friday>True</friday>
+      <saturday>False</saturday>
+      <sunday>False</sunday>
+    </periodic>
+    <source>
+      <type>spotify</type>
+      <item>mylist</item>
+      <randomize>True</randomize>
+    </source>
+    <volume>
+      <start>40</start>
+      <end>60</end>
+      <ramptime>1</ramptime>
+    </volume>
+    <snooze>
+      <enable>True</enable>
+      <time>5</time>
+    </snooze>
+    <weather>
+      <enable>True</enable>
+      <greeting>kaixo</greeting>
+      <delay>5</delay>
+    </weather>
+  </alarm>
+</alarms>

@@ -1,0 +1,36 @@
+<doctype html>
+<head>
+    <title>FM Radio tunner</title>
+</head>
+
+<h2>FM Radio control</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% from "_formhelpers.html" import render_field_raw %}
+<form method=post>
+  <table>
+    <tr>
+       <td colspan='3' align="center">{{ cform.freq.label }} </td>
+    </tr>
+    <tr>
+       <td colspan='3' align="center">{{ render_field_raw(cform.freq) }} MHz </td>
+    </tr>
+    <tr>
+      <td align="center">{{ render_field_raw(cform.dec) }} </td>
+      <td align="center">{{ render_field_raw(cform.tune) }} </td>
+      <td align="center">{{ render_field_raw(cform.inc) }} </td>
+    </tr>
+    <tr>
+       <td colspan='3' align="center">{{ render_field_raw(cform.swoff) }} </td>
+    </tr>
+  </table>
+</form>

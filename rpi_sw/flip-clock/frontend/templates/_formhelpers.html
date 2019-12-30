@@ -1,0 +1,36 @@
+{% macro render_field(field) %}
+    <td>{{ field.label }}
+	</td>
+    <td>{{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </td>
+{% endmacro %}
+
+{% macro render_field_wol(field) %}
+    <td>{{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </td>
+{% endmacro %}
+
+{% macro render_field_raw(field) %}
+{{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
