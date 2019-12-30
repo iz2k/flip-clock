@@ -4,11 +4,9 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
-<div class="topnav">
-  <a class="active" href="/radio">Radio</a>
-  <a href="/alarm">Alarms</a>
-  <a href="http://flip-clock-pi:6680/iris/">Mopidy</a>
-</div>
+{% from "_navbar.html" import render_navbar %}
+    {{ render_navbar('radio') }}
+
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}

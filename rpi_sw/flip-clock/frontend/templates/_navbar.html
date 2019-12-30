@@ -1,0 +1,8 @@
+{% macro render_navbar(activefield) %}
+<div class="topnav">
+  <a {% if activefield=='clock' %} class="active" {% endif %} href="/clock">Clock</a>
+  <a {% if activefield=='alarm' %} class="active" {% endif %} href="/alarm">Alarms</a>
+  <a {% if activefield=='spotify' %} class="active" {% endif %} href="/spotify">Spotify</a>
+  <a {% if activefield=='radio' %} class="active" {% endif %} href="/radio">Radio</a>
+</div>
+{% endmacro %}

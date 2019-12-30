@@ -3,6 +3,7 @@
 from app import app
 import radio_frontend
 import alarm_frontend
+import spotify_frontend
 
 if __name__ == '__main__':
 	import os

@@ -1,15 +1,7 @@
-# forms.py
-
-from wtforms import Form, StringField, IntegerField, BooleanField, HiddenField, SelectField, DecimalField, SubmitField, \
-    validators
+from wtforms import Form, StringField, IntegerField, BooleanField, HiddenField, SubmitField
 from lxml import etree
+from tools import str2bool
 
-
-def str2bool(str):
-    if str == 'True' or str == 'true':
-        return True
-    else:
-        return False
 
 
 class AlarmPeriodic:
@@ -292,3 +284,15 @@ def save_alarm_list(alarms, filename):
 
     with open(filename, 'w', encoding='utf8') as doc:
         doc.write(etree.tostring(alist, pretty_print=True, encoding='unicode'))
+
+def load_alarm_list(filename):
+    tree = etree.parse(filename)
+
+    # Create alarm objects from XML
+    alarms = []
+    for el in tree.findall('alarm'):
+        alarm = Alarm(xml=el)
+        alarms.append(alarm)
+
+    # Return alarm object list
+    return alarms

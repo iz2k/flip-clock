@@ -4,13 +4,6 @@ from wtforms import Form, StringField, IntegerField, SelectField, DecimalField, 
 from decimal import Decimal
 from lxml import etree
 
-class RadioControlForm(Form):
-	freq = DecimalField('Frequency:', places=2)
-	tune = SubmitField(label='Tune')
-	dec = SubmitField(label='<<')
-	inc = SubmitField(label='>>')
-	swoff = SubmitField(label='Switch off')
-
 
 class RadioStation:
 	freq = 0
@@ -50,6 +43,12 @@ class RadioStationForm(Form):
 		self.freq.data = rstation.freq
 		self.name.data = rstation.name
 
+class RadioControlForm(Form):
+	freq = DecimalField('Frequency:', places=2)
+	tune = SubmitField(label='Tune')
+	dec = SubmitField(label='<<')
+	inc = SubmitField(label='>>')
+	swoff = SubmitField(label='Switch off')
 
 def save_radio_list(rstations, filename):
 	# Create main element

@@ -1,0 +1,77 @@
+<doctype html>
+<head>
+    <title>Spotify</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+{% from "_navbar.html" import render_navbar %}
+    {{ render_navbar('spotify') }}
+
+<h2>Spotify configuration</h2>
+
+<p><p>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% from "_formhelpers.html" import render_field_raw, render_field %}
+  Add new Spotify item:
+    <form method=post>
+        <table border="1px">
+            <tr>
+                {{ render_field(sformnew.name) }}
+            </tr>
+            <tr>
+                {{ render_field(sformnew.type) }}
+            </tr>
+            <tr>
+                {{ render_field(sformnew.URI) }}
+            </tr>
+            <tr>
+                {{ render_field(sformnew.shuffle) }}
+            </tr>
+            <tr>
+                {{ render_field(sformnew.new) }}
+            </tr>
+        </table>
+    </form>
+  Stored Spotify items:
+<ul style="list-style-type:none;">
+  <!-- For loop logic of jinja template -->
+{%for i in range(0, nsforms)%}
+    <li>
+    <form method=post>
+            <table border="1px">
+                <tr>
+                    {{ render_field(sforms[i].name) }}
+                </tr>
+                <tr>
+                    {{ render_field(sforms[i].type) }}
+                </tr>
+                <tr>
+                    {{ render_field(sforms[i].URI) }}
+                </tr>
+                <tr>
+                    {{ render_field(sforms[i].shuffle) }}
+                </tr>
+                <tr>
+                    <table>
+                        <tr>
+                            {{ render_field_raw(sforms[i].idx) }}
+                            {{ render_field_raw(sforms[i].update) }}
+                            {{ render_field_raw(sforms[i].delete) }}
+                        </tr>
+                    </table>
+                </tr>
+        </table>
+    </form>
+    </li>
+{%endfor%}
+</ul>

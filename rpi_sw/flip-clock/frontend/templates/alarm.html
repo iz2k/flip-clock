@@ -4,11 +4,8 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
-<div class="topnav">
-  <a href="/radio">Radio</a>
-  <a class="active"  href="/alarm">Alarms</a>
-  <a href="http://flip-clock-pi:6680/iris/">Mopidy</a>
-</div>
+{% from "_navbar.html" import render_navbar %}
+    {{ render_navbar('alarm') }}
 
 <h2>Alarm configuration</h2>
 

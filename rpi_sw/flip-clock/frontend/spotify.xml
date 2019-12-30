@@ -1,0 +1,14 @@
+<spotitems>
+  <spotitem>
+    <name>Los 40 principales</name>
+    <type>Playlist</type>
+    <URI>12345</URI>
+    <shuffle>True</shuffle>
+  </spotitem>
+  <spotitem>
+    <name>acoustic</name>
+    <type>Track</type>
+    <URI>45454</URI>
+    <shuffle>False</shuffle>
+  </spotitem>
+</spotitems>

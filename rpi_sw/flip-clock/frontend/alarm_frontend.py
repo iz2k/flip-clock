@@ -1,20 +1,11 @@
-import shlex
-import subprocess
 from app import app
-from alarm_models import Alarm, AlarmForm, save_alarm_list
-from flask import flash, render_template, request, redirect
-import decimal
-from lxml import etree
+from alarm_models import Alarm, AlarmForm, save_alarm_list, load_alarm_list
+from flask import render_template, request
 
 @app.route('/alarm', methods=['GET', 'POST'])
 def alarm_index():
-	tree = etree.parse('alarms.xml')
-
-	# Create alarm objects from XML
-	alarms=[]
-	for el in tree.findall('alarm'):
-		alarm = Alarm(xml=el)
-		alarms.append(alarm)
+	# Load stored alarm objects
+	alarms = load_alarm_list('alarms.xml')
 
 	if request.method == 'POST':
 		reqform = AlarmForm(request.form)
