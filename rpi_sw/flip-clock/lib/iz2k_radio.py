@@ -7,8 +7,6 @@ from lxml import etree
 
 class radio:
 
-	current_radio_station = 0
-	
 	def __init__(self):
 	
 		bindir = os.path.dirname(os.path.realpath(__file__))
@@ -16,6 +14,9 @@ class radio:
 		tree = etree.parse(bindir + '/../config/radio_stations.xml')
 		self.radio_stations_freq = tree.getroot().xpath('//station/freq/text()')
 		self.radio_stations_name = tree.getroot().xpath('//station/name/text()')
+		
+		self.current_radio_station = 0
+		self.softfm=None
 
 	def kill_radio(self):
 		print("[radio] Radio OFF")
@@ -27,9 +28,9 @@ class radio:
 		print("[radio] Tunning radio: [" + self.radio_stations_freq[self.current_radio_station] + "MHz] " 
 				+ self.radio_stations_name[self.current_radio_station])
 	
-		# Kill previous instances
-		subprocess.call(['pkill', '-9', 'softfm'])
-		subprocess.call(['pkill', '-9', 'mplayer'])
+		if self.softfm is not None:
+			self.softfm.terminate()
+			self.softfm.wait()
 		
 		# Speak out radio name
 		cmd = shlex.split('mplayer -ao alsa -af volume=10 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' 
@@ -38,7 +39,7 @@ class radio:
 		
 		# Synthonize radio
 		cmd=shlex.split('softfm -f ' + self.radio_stations_freq[self.current_radio_station] + 'M')
-		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+		self.softfm = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
 	def next_station(self):
 		self.current_radio_station += 1

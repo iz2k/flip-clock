@@ -1,6 +1,8 @@
 import os
 import wave
 import alsaaudio
+import subprocess
+import shlex
 
 class sound:
 	
@@ -82,3 +84,15 @@ class sound:
 		self.mute = not self.mute
 		self.update_volume()
 		return self.mute
+		
+	def say_text(self, text, lang='en'):
+		raw_cmd='mplayer -ao alsa -af volume=10 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob'
+		raw_cmd+='&tl='
+		raw_cmd+=lang
+		raw_cmd+='&q='
+		raw_cmd+= text
+		raw_cmd+='"'
+		print(raw_cmd)
+		
+		cmd = shlex.split(raw_cmd)
+		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)

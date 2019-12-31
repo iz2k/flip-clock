@@ -47,6 +47,9 @@ def ctrl_rotary_callback(direction):
 
 def ctrl_sw_short():
 	print("[UI] CTRL pressed SHORT")
+	if status == 'spotify':
+		sound.play('source')
+		spotify.next_list()
 
 def ctrl_sw_long():
 	global status
@@ -54,11 +57,15 @@ def ctrl_sw_long():
 	if status == 'idle':
 		sound.play('on')
 		status='spotify'
-		spotify.play_list('spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p')
+		sound.say_text('Spotify', lang='es')
+		time.sleep(1)
+		spotify.play_spotify()
 	elif status == 'spotify':
 		sound.play('on')
 		status = 'radio'
 		spotify.kill_spotify()
+		sound.say_text('Radio', lang='es')
+		time.sleep(1)
 		radio.play_radio()
 	elif status == 'radio':
 		sound.play('off')
