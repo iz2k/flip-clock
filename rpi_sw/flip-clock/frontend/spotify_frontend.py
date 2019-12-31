@@ -1,4 +1,4 @@
-from app import app
+from iz2k_frontend import app
 from spotify_models import Spotitem, SpotitemForm, save_spotitem_list, load_spotitem_list
 from flask import render_template, request
 import os

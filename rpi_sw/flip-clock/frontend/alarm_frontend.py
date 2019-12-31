@@ -1,4 +1,4 @@
-from app import app
+from iz2k_frontend import app
 from alarm_models import Alarm, AlarmForm, save_alarm_list, load_alarm_list
 from flask import render_template, request
 import os

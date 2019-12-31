@@ -1,10 +1,8 @@
-import shlex
-import subprocess
-from app import app
+from iz2k_frontend import app
 from radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list, load_radio_list
-from flask import flash, render_template, request, redirect
+from flask import render_template, request
 from decimal import Decimal
-from lxml import etree
+import shlex
 import os
 
 @app.route('/radio', methods=['GET', 'POST'])
