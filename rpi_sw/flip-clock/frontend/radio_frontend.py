@@ -1,9 +1,10 @@
-from iz2k_frontend import app
-from radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list, load_radio_list
+from .app import app
+from .radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list, load_radio_list
 from flask import render_template, request
 from decimal import Decimal
 import shlex
 import os
+import subprocess
 
 @app.route('/radio', methods=['GET', 'POST'])
 def radio_index():
@@ -62,8 +63,7 @@ def tune_radio():
 
 	if request.method == 'POST':
 		# Kill previous instances
-		#subprocess.call(['pkill', '-9', 'softfm'])
-		#subprocess.call(['pkill', '-9', 'mplayer'])
+		subprocess.call(['pkill', '-9', 'softfm'])
 		if radiocontrol.swoff.data:
 			print('Switching radio OFF')
 		else:
@@ -80,7 +80,7 @@ def tune_radio():
 			# Synthonize radio
 			print('Tunning', radiocontrol.freq.data, 'MHz')
 			cmd = shlex.split('softfm -f ' + str(radiocontrol.freq.data) + 'M')
-			#subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+			subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 	else:
 		radiocontrol.freq.data = Decimal(88)
 

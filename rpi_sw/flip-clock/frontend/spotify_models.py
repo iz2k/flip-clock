@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, BooleanField, SelectField, DecimalField, SubmitField, HiddenField
-from tools import str2bool
+from .tools import str2bool
 from lxml import etree
 
 

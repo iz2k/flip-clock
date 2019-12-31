@@ -1,6 +1,6 @@
 from wtforms import Form, StringField, IntegerField, BooleanField, HiddenField, SubmitField
 from lxml import etree
-from tools import str2bool
+from .tools import str2bool
 
 
 

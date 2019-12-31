@@ -9,6 +9,7 @@ from lib import iz2k_radio
 from lib import iz2k_led
 from lib import iz2k_clock
 from lib import iz2k_config
+from frontend import iz2k_frontend
 
 # Define CTRL callbacks
 def vol_rotary_callback(direction):	
@@ -107,6 +108,9 @@ ctrl_switch.setup_switch(long_press=True, sw_short_callback=snooze_sw_short, sw_
 
 # Create clock controller
 clock = iz2k_clock.clock()
+
+# Create web frontend app
+iz2k_frontend.iz2k_frontend_init()
 
 print('Flip ClockController running!')
 

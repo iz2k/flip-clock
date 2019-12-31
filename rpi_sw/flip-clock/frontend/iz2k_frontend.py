@@ -1,7 +1,10 @@
 from flask import Flask, send_from_directory, render_template
-
-app = Flask(__name__)
-app.run(port=5000, host='0.0.0.0')
+import threading
+import time
+from .app import app
+from . import alarm_frontend
+from . import spotify_frontend
+from . import radio_frontend
 
 @app.route('/css/<path:path>')
 def send_css(path):
@@ -15,3 +18,8 @@ def send_img(path):
 def main_index():
 	return render_template('index.html')
 
+def run_app():
+	app.run(port=5000, host='0.0.0.0', debug=False)
+
+def iz2k_frontend_init():
+	th=threading.Thread(target=run_app).start()
