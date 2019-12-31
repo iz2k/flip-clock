@@ -5,6 +5,7 @@ Conflicts=getty@tty1.service
 
 [Service]
 Type=simple
+User=pi
 ExecStart=/usr/bin/python3 /usr/share/flip-clock/flip-clock.py
 StandardInput=tty-force
 StandardOutput=syslog
