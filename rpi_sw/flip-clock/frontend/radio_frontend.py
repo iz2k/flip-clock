@@ -1,21 +1,19 @@
 import shlex
 import subprocess
 from app import app
-from radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list
+from radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list, load_radio_list
 from flask import flash, render_template, request, redirect
 from decimal import Decimal
 from lxml import etree
+import os
 
 @app.route('/radio', methods=['GET', 'POST'])
 def radio_index():
 	lastfreq=Decimal(88.0)
 
-	tree = etree.parse('radio_stations.xml')
-	# Create alarm objects from XML
-	rstations=[]
-	for el in tree.findall('station'):
-		station = RadioStation(xml=el)
-		rstations.append(station)
+	# Create radiostation objects from XML
+	rundir = os.path.dirname(os.path.realpath(__file__))
+	rstations = load_radio_list(rundir + '/../config/radio_stations.xml')
 
 	if request.method == 'POST':
 		reqform = RadioStationForm(request.form)
@@ -42,7 +40,7 @@ def radio_index():
 			if reqform.pos.data < len(rstations) + 1 and reqform.pos.data > 0:
 				print('Moving station to position')
 				rstations.insert(reqform.pos.data-1, rstations.pop(idx))
-		save_radio_list(rstations=rstations, filename='radio_stations.xml')
+		save_radio_list(rstations=rstations, filename=rundir + '/../config/radio_stations.xml')
 		lastfreq=Decimal(reqform.lastfreq.data)
 
 	# Create radio station forms from objects

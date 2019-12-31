@@ -64,3 +64,15 @@ def save_radio_list(rstations, filename):
 
 	with open(filename, 'w', encoding='utf8') as doc:
 		doc.write(etree.tostring(rlist, pretty_print=True, encoding='unicode'))
+
+def load_radio_list(filename):
+    tree = etree.parse(filename)
+
+    # Create radio_station objects from XML
+    rstations = []
+    for el in tree.findall('station'):
+        rstation = RadioStation(xml=el)
+        rstations.append(rstation)
+
+    # Return radio_station object list
+    return rstations

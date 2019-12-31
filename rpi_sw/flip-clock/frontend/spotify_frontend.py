@@ -1,12 +1,15 @@
 from app import app
 from spotify_models import Spotitem, SpotitemForm, save_spotitem_list, load_spotitem_list
 from flask import render_template, request
+import os
+
 
 @app.route('/spotify', methods=['GET', 'POST'])
 def spotify_index():
 	# Load stored spotitem objects
-	spotitems = load_spotitem_list('spotify.xml')
-	#spotitems = []
+	rundir = os.path.dirname(os.path.realpath(__file__))
+	spotitems = load_spotitem_list(rundir + '/../config/spotify.xml')
+
 	if request.method == 'POST':
 		reqform = SpotitemForm(request.form)
 		if reqform.new.data:
@@ -19,7 +22,7 @@ def spotify_index():
 		if reqform.delete.data:
 			print('Deleting alarm')
 			spotitems.pop(int(reqform.idx.data))
-		save_spotitem_list(spotitems=spotitems, filename='spotify.xml')
+		save_spotitem_list(spotitems=spotitems, filename=rundir + '/../config/spotify.xml')
 
 	# Create alarm forms from objects
 	spotitemforms=[]
