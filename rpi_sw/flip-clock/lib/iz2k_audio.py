@@ -92,7 +92,6 @@ class sound:
 		raw_cmd+='&q='
 		raw_cmd+= text
 		raw_cmd+='"'
-		print(raw_cmd)
 		
 		cmd = shlex.split(raw_cmd)
 		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)

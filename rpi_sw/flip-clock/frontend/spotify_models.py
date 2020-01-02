@@ -4,12 +4,11 @@ from lxml import etree
 
 
 class Spotitem:
-	name = None
-	type = None
-	URI = None
-	shuffle = None
 
 	def __init__(self, form=None, xml=None):
+		self.name = None
+		self.URI = None
+		self.shuffle = None
 		if form != None:
 			self.parseForm(form)
 		if xml != None:
@@ -17,7 +16,6 @@ class Spotitem:
 
 	def parseForm(self, form):
 		self.name = form.name.data
-		self.type = form.type.data
 		self.URI = form.URI.data
 		self.shuffle = form.shuffle.data
 
@@ -25,8 +23,6 @@ class Spotitem:
 		for ch in xml.getchildren():
 			if ch.tag == 'name':
 				self.name = ch.text
-			if ch.tag == 'type':
-				self.type = ch.text
 			if ch.tag == 'URI':
 				self.URI = ch.text
 			if ch.tag == 'shuffle':
@@ -35,9 +31,6 @@ class Spotitem:
 class SpotitemForm(Form):
 	idx = HiddenField()
 	name = StringField('Name')
-	type_choices = [('Track', 'Track'),
-			   ('Playlist', 'Playlist')]
-	type = SelectField('Type', choices=type_choices)
 	URI = StringField('URI')
 	shuffle = BooleanField('shuffle')
 	delete = SubmitField(label='Delete')
@@ -46,7 +39,6 @@ class SpotitemForm(Form):
 
 	def readobject(self, spotitem):
 		self.name.data = spotitem.name
-		self.type.data = spotitem.type
 		self.URI.data = spotitem.URI
 		self.shuffle.data = spotitem.shuffle
 
@@ -60,8 +52,6 @@ def save_spotitem_list(spotitems, filename):
 		# Main tags
 		se = etree.SubElement(rs, 'name')
 		se.text = str(sitem.name)
-		se = etree.SubElement(rs, 'type')
-		se.text = str(sitem.type)
 		se = etree.SubElement(rs, 'URI')
 		se.text = str(sitem.URI)
 		se = etree.SubElement(rs, 'shuffle')

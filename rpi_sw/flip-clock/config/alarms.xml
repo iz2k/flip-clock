@@ -10,27 +10,61 @@
       <wednesday>True</wednesday>
       <thursday>True</thursday>
       <friday>True</friday>
-      <saturday>False</saturday>
+      <saturday>True</saturday>
       <sunday>False</sunday>
     </periodic>
     <source>
       <type>spotify</type>
-      <item>mylist</item>
+      <item>kk</item>
       <randomize>True</randomize>
     </source>
     <volume>
-      <start>40</start>
-      <end>60</end>
+      <start>10</start>
+      <end>100</end>
       <ramptime>1</ramptime>
     </volume>
     <snooze>
-      <enable>True</enable>
-      <time>5</time>
+      <enable>False</enable>
+      <time>1</time>
     </snooze>
     <weather>
+      <enable>False</enable>
+      <greeting>hola</greeting>
+      <delay>1</delay>
+    </weather>
+  </alarm>
+  <alarm>
+    <name>kk</name>
+    <hour>16</hour>
+    <minute>39</minute>
+    <periodic>
       <enable>True</enable>
-      <greeting>kaixo</greeting>
-      <delay>5</delay>
+      <monday>True</monday>
+      <tuesday>True</tuesday>
+      <wednesday>True</wednesday>
+      <thursday>True</thursday>
+      <friday>True</friday>
+      <saturday>True</saturday>
+      <sunday>False</sunday>
+    </periodic>
+    <source>
+      <type>spotify</type>
+      <item>spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p</item>
+      <randomize>True</randomize>
+    </source>
+    <volume>
+      <start>10</start>
+      <end>100</end>
+      <ramptime>1</ramptime>
+    </volume>
+    <snooze>
+      <enable>False</enable>
+      <time>1</time>
+    </snooze>
+    <weather>
+      <enable>False</enable>
+      <greeting>hola</greeting>
+      <delay>1</delay>
     </weather>
   </alarm>
 </alarms>

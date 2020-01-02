@@ -8,11 +8,12 @@ from lib import iz2k_spotify
 from lib import iz2k_radio
 from lib import iz2k_led
 from lib import iz2k_clock
+from lib import iz2k_alarmclock
 from lib import iz2k_config
 from frontend import iz2k_frontend
 
 # Define CTRL callbacks
-def vol_rotary_callback(direction):	
+def vol_rotary_callback(direction):
 	if direction is 1:
 		if sound.volume_up():
 			strip.colorBlinkPos(color=Color(0,50,0), pos=sound.volume/sound.volume_step)
@@ -79,6 +80,7 @@ def snooze_sw_short():
 def snooze_sw_long():
 	print("[UI] SNOOZE pressed LONG")
 
+
 # Load config
 #conf = iz2k_config.configuration()
 status='idle'
@@ -87,10 +89,10 @@ status='idle'
 sound = iz2k_audio.sound()
 
 # Create spotify controller
-spotify = iz2k_spotify.spotify()
+spotify = iz2k_spotify.spotify(sound=sound)
 
 # Create radio controller
-radio = iz2k_radio.radio()
+radio = iz2k_radio.radio(sound=sound)
 
 # Create LED strip
 strip = iz2k_led.neoled()
@@ -116,6 +118,9 @@ ctrl_switch.setup_switch(long_press=True, sw_short_callback=snooze_sw_short, sw_
 # Create clock controller
 clock = iz2k_clock.clock()
 
+# Create alarmclock controller
+alarmclock=iz2k_alarmclock.alarmclock(sound, spotify, radio, strip, clock)
+
 # Create web frontend app
 iz2k_frontend.iz2k_frontend_init()
 
@@ -124,4 +129,5 @@ print('Flip ClockController running!')
 # Keep alive
 while True:
 	clock.run()
+	alarmclock.run()
 	time.sleep(0.5)	
