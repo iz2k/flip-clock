@@ -35,7 +35,9 @@
                 {{ render_field(sformnew.shuffle) }}
             </tr>
             <tr>
-                {{ render_field(sformnew.new) }}
+			  <td colspan=2 align='center'>
+                {{ render_field_raw(sformnew.new) }}
+			  </td>
             </tr>
         </table>
     </form>
@@ -56,13 +58,11 @@
                     {{ render_field(sforms[i].shuffle) }}
                 </tr>
                 <tr>
-                    <table>
-                        <tr>
-                            {{ render_field_raw(sforms[i].idx) }}
-                            {{ render_field_raw(sforms[i].update) }}
-                            {{ render_field_raw(sforms[i].delete) }}
-                        </tr>
-                    </table>
+				  <td colspan=2 align='center'>
+								{{ render_field_raw(sforms[i].idx) }}
+								{{ render_field_raw(sforms[i].update) }}
+								{{ render_field_raw(sforms[i].delete) }}
+				  </td>
                 </tr>
         </table>
     </form>

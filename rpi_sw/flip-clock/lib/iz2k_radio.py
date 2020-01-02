@@ -21,6 +21,11 @@ class radio:
 			self.softfm.terminate()
 			self.softfm.wait()
 
+	def tune_freq(self, freq):
+		cmd=shlex.split('softfm -f ' + str(freq) + 'M')
+		self.softfm = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+		
+
 	def play_radio(self):		
 		# Kill previous instances
 		self.kill_radio()
@@ -32,8 +37,7 @@ class radio:
 		self.sound.say_text(self.radio_stations[self.current_radio_station].name, lang='es')
 
 		# Synthonize radio
-		cmd=shlex.split('softfm -f ' + str(self.radio_stations[self.current_radio_station].freq) + 'M')
-		self.softfm = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+		self.tune_freq(self.radio_stations[self.current_radio_station].freq)
 
 	def next_station(self):
 		print('[radio] Moving to next station...')
