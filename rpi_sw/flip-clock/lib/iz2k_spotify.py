@@ -9,12 +9,17 @@ from frontend import spotify_models
 class spotify:
 
 	def __init__(self, sound):
-		bindir = os.path.dirname(os.path.realpath(__file__))
-		self.spotitems = spotify_models.load_spotitem_list(bindir + '/../config/spotify.xml')
+		self.reload_xml()
 		self.current_item = 0
 		self.tizonia = None
 		self.sound=sound
-		
+
+	def reload_xml(self):
+		print('[spotify] Loading spotitem list')
+		# Load spotitems from XML
+		bindir = os.path.dirname(os.path.realpath(__file__))
+		self.spotitems = spotify_models.load_spotitem_list(bindir + '/../config/spotify.xml')
+
 	def kill_spotify(self):
 		if self.tizonia is not None:
 			print("[spotify] Spotify OFF")

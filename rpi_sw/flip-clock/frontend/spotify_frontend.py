@@ -1,4 +1,4 @@
-from .app import app
+from .app import app, frontendqueue
 from .spotify_models import Spotitem, SpotitemForm, save_spotitem_list, load_spotitem_list
 from flask import render_template, request
 import os
@@ -13,18 +13,19 @@ def spotify_index():
 	if request.method == 'POST':
 		reqform = SpotitemForm(request.form)
 		if reqform.new.data:
-			print('Adding new alarm')
+			print('[frontend][spotify] Adding new spotitem')
 			spotitem = Spotitem(form=reqform)
 			spotitems.append(spotitem)
 		if reqform.update.data:
-			print('Updating alarm')
+			print('[frontend][spotify] Updating spotitem')
 			spotitems[int(reqform.idx.data)].parseForm(reqform)
 		if reqform.delete.data:
-			print('Deleting alarm')
+			print('[frontend][spotify] Deleting spotitem')
 			spotitems.pop(int(reqform.idx.data))
 		save_spotitem_list(spotitems=spotitems, filename=rundir + '/../config/spotify.xml')
+		frontendqueue.put('spotify_update')
 
-	# Create alarm forms from objects
+	# Create spotitem forms from objects
 	spotitemforms=[]
 	for idx, el in enumerate(spotitems):
 		spotitemform = SpotitemForm()

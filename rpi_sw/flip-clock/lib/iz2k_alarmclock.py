@@ -10,11 +10,14 @@ class alarmclock:
 		self.radio = radio
 		self.strip = strip
 		self.clock = clock
-		
+		self.reload_xml()
+
+	def reload_xml(self):
+		print('[alarm] Loading alarm list')
 		# Load alarms from XML
 		bindir = os.path.dirname(os.path.realpath(__file__))
 		self.alarms = alarm_models.load_alarm_list(bindir + '/../config/alarms.xml')
-
+	
 	def snooze(self):
 		# Go through all alarms
 		for alarm in self.alarms:

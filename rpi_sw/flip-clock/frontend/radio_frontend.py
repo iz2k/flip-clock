@@ -1,4 +1,4 @@
-from .app import app
+from .app import app, frontendqueue
 from .radio_models import RadioControlForm, RadioStationForm, RadioStation, save_radio_list, load_radio_list
 from flask import render_template, request
 from decimal import Decimal
@@ -9,7 +9,7 @@ import subprocess
 @app.route('/radio', methods=['GET', 'POST'])
 def radio_index():
 	lastfreq=Decimal(88.0)
-
+	
 	# Create radiostation objects from XML
 	rundir = os.path.dirname(os.path.realpath(__file__))
 	rstations = load_radio_list(rundir + '/../config/radio_stations.xml')
@@ -18,28 +18,29 @@ def radio_index():
 		reqform = RadioStationForm(request.form)
 		idx=int(reqform.idx.data)
 		if reqform.new.data:
-			print('Adding new station')
+			print('[frontend][radio] Adding new station')
 			rstation = RadioStation(form=reqform)
 			rstations.append(rstation)
 		elif reqform.update.data:
-			print('Updating station')
+			print('[frontend][radio] Updating station')
 			rstations[idx].parseForm(reqform)
 		elif reqform.delete.data:
-			print('Deleting station')
+			print('[frontend][radio] Deleting station')
 			rstations.pop(idx)
 		elif reqform.up.data:
 			if idx > 0:
-				print('Moving up station')
+				print('[frontend][radio] Moving station up')
 				rstations.insert(idx-1, rstations.pop(idx))
 		elif reqform.down.data:
 			if idx<len(rstations)-1:
-				print('Moving down station')
+				print('[frontend][radio] Moving station down')
 				rstations.insert(idx+1, rstations.pop(idx))
 		elif reqform.setpos.data:
 			if reqform.pos.data < len(rstations) + 1 and reqform.pos.data > 0:
-				print('Moving station to position')
+				print('[frontend][radio] Moving station to position')
 				rstations.insert(reqform.pos.data-1, rstations.pop(idx))
 		save_radio_list(rstations=rstations, filename=rundir + '/../config/radio_stations.xml')
+		frontendqueue.put('radio_update')
 		lastfreq=Decimal(reqform.lastfreq.data)
 
 	# Create radio station forms from objects

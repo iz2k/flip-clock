@@ -1,4 +1,4 @@
-from .app import app
+from .app import app, frontendqueue
 from .alarm_models import Alarm, AlarmForm, save_alarm_list, load_alarm_list
 from flask import render_template, request
 import os
@@ -12,16 +12,17 @@ def alarm_index():
 	if request.method == 'POST':
 		reqform = AlarmForm(request.form)
 		if reqform.new.data:
-			print('Adding new alarm')
+			print('[frontend][alarm] Adding new alarm')
 			alarm = Alarm(form=reqform)
 			alarms.append(alarm)
 		if reqform.update.data:
-			print('Updating alarm')
+			print('[frontend][alarm] Updating alarm')
 			alarms[int(reqform.idx.data)].parseForm(reqform)
 		if reqform.delete.data:
-			print('Deleting alarm')
+			print('[frontend][alarm] Deleting alarm')
 			alarms.pop(int(reqform.idx.data))
 		save_alarm_list(alarms=alarms, filename=rundir + '/../config/alarms.xml')
+		frontendqueue.put('alarm_update')
 
 	# Create alarm forms from objects
 	alarmforms=[]

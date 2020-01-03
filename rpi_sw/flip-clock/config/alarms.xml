@@ -4,7 +4,7 @@
     <hour>7</hour>
     <minute>10</minute>
     <periodic>
-      <enable>False</enable>
+      <enable>True</enable>
       <monday>True</monday>
       <tuesday>True</tuesday>
       <wednesday>True</wednesday>
@@ -35,8 +35,8 @@
   </alarm>
   <alarm>
     <name>kk</name>
-    <hour>19</hour>
-    <minute>27</minute>
+    <hour>9</hour>
+    <minute>59</minute>
     <periodic>
       <enable>True</enable>
       <monday>True</monday>
@@ -45,7 +45,7 @@
       <thursday>True</thursday>
       <friday>True</friday>
       <saturday>True</saturday>
-      <sunday>False</sunday>
+      <sunday>True</sunday>
     </periodic>
     <source>
       <type>spotify</type>

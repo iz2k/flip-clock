@@ -11,6 +11,7 @@ from lib import iz2k_clock
 from lib import iz2k_alarmclock
 from lib import iz2k_config
 from frontend import iz2k_frontend
+from frontend.app import frontendqueue
 
 # Define CTRL callbacks
 def vol_rotary_callback(direction):
@@ -132,3 +133,11 @@ while True:
 	clock.run()
 	alarmclock.run()
 	time.sleep(0.5)	
+	if frontendqueue.empty() is False:
+		frontend_msg=frontendqueue.get()
+		if frontend_msg == 'radio_update':
+			radio.reload_xml()
+		elif frontend_msg == 'spotify_update':
+			spotify.reload_xml()
+		elif frontend_msg == 'alarm_update':
+			alarmclock.reload_xml()

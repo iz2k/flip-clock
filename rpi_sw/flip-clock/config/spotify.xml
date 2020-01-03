@@ -1,19 +1,16 @@
 <spotitems>
   <spotitem>
     <name>Los 40 principales</name>
-    <type>Playlist</type>
     <URI>spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p</URI>
     <shuffle>True</shuffle>
   </spotitem>
   <spotitem>
     <name>Acoustic covers</name>
-    <type>Playlist</type>
     <URI>spotify:playlist:37i9dQZF1DWXmlLSKkfdAk</URI>
     <shuffle>True</shuffle>
   </spotitem>
   <spotitem>
     <name>Christmas Hits</name>
-    <type>Playlist</type>
     <URI>spotify:playlist:37i9dQZF1DX0Yxoavh5qJV</URI>
     <shuffle>True</shuffle>
   </spotitem>

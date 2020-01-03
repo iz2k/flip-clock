@@ -9,12 +9,17 @@ from frontend import radio_models
 class radio:
 
 	def __init__(self, sound):
-		bindir = os.path.dirname(os.path.realpath(__file__))
-		self.radio_stations= radio_models.load_radio_list(bindir + '/../config/radio_stations.xml')	
+		self.reload_xml()
 		self.current_radio_station = 0
 		self.softfm=None
 		self.sound=sound
 
+	def reload_xml(self):
+		print('[radio] Loading radio station list')
+		# Load radio stations from XML
+		bindir = os.path.dirname(os.path.realpath(__file__))
+		self.radio_stations= radio_models.load_radio_list(bindir + '/../config/radio_stations.xml')	
+	
 	def kill_radio(self):
 		if self.softfm is not None:
 			print("[radio] Radio OFF")
@@ -26,7 +31,7 @@ class radio:
 		self.softfm = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 		
 
-	def play_radio(self):		
+	def play_radio(self):
 		# Kill previous instances
 		self.kill_radio()
 		
@@ -45,7 +50,7 @@ class radio:
 		if (self.current_radio_station >= len(self.radio_stations)):
 				self.current_radio_station=0
 		self.play_radio()
-		
+
 	def previous_station(self):
 		print('[radio] Moving to previous station...')
 		self.current_radio_station -= 1
