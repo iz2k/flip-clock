@@ -76,11 +76,12 @@ def ctrl_sw_long():
 
 def snooze_sw_short():
 	print("[UI] SNOOZE pressed SHORT")
-	alarmclock.snooze()
+	alarmclock.snooze_short()
 	strip.nightlight(Color(64, 5, 0))
 
 def snooze_sw_long():
 	print("[UI] SNOOZE pressed LONG")
+	alarmclock.snooze_long()
 
 
 # Load config

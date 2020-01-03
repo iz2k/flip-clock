@@ -18,26 +18,41 @@ class alarmclock:
 		bindir = os.path.dirname(os.path.realpath(__file__))
 		self.alarms = alarm_models.load_alarm_list(bindir + '/../config/alarms.xml')
 	
-	def snooze(self):
+	def snooze_short(self):
 		# Go through all alarms
 		for alarm in self.alarms:
-			# Check alarm has not been trigered yet
-			if alarm.status == 'on':
+			# Check alarm is ON
+			if alarm.status == 'on' or alarm.status == 'snooze_on':
 				# Go silent
 				self.radio.kill_radio()
 				self.spotify.kill_spotify()
 				if alarm.snooze.enable:
 					print('[alarm] Alarm ' + alarm.name + ' going to snooze wait mode')
 					alarm.status = 'snooze_wait'
+					# Calculate Snooze time
+					now = datetime.now()
+					alarm.snooze_hh = now.hour
+					alarm.snooze_mm = now.minute + alarm.snooze.time
+					if alarm.snooze_mm > 59:
+						alarm.snooze_mm -= 60
+						alarm.snooze_hh += 1
+						if alarm.snooze_hh > 23:
+							alarm.snooze_hh -= 24
 				else:
 					print('[alarm] Alarm ' + alarm.name + ' going off')
 					alarm.status = 'off'
-			elif alarm.status == 'snooze_on':
+
+	def snooze_long(self):
+		# Go through all alarms
+		for alarm in self.alarms:
+			# Check alarm is ON or in SNOOZE wait
+			if alarm.status == 'on' or alarm.status == 'snooze_on' or alarm.status == 'snooze_wait':
 				# Go silent
 				self.radio.kill_radio()
 				self.spotify.kill_spotify()
 				print('[alarm] Alarm ' + alarm.name + ' going off')
 				alarm.status = 'off'
+				self.sound.play('off')
 
 	def play(self, alarm):
 		# Determine source
@@ -53,6 +68,8 @@ class alarmclock:
 			self.radio.kill_radio()
 			self.spotify.kill_spotify()
 			self.radio.tune_freq(freq=alarm.source.item)
+		
+		# Put light ON
 
 	def run(self):
 		now = datetime.now()
@@ -74,15 +91,8 @@ class alarmclock:
 							self.play(alarm)
 				# Check if alarm is in snooze
 				elif alarm.status == 'snooze_wait':
-					# Check current time is alarm time + snooze time
-					snooze_hh = alarm.hour
-					snooze_mm = alarm.minute + alarm.snooze.time
-					if snooze_mm > 59:
-						snooze_mm -= 60
-						snooze_hh += 1
-						if snooze_hh > 23:
-							snooze_hh -= 24
-					if snooze_hh == hh and snooze_mm == mm:
+					# Check current time is snooze time
+					if alarm.snooze_hh == hh and alarm.snooze_mm == mm:
 						# Trigger alarm
 						print('[alarm] Alarm ' + alarm.name + ' going to snooze on mode')
 						alarm.status = 'snooze_on'

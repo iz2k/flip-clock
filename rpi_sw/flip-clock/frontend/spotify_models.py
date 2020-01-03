@@ -66,7 +66,6 @@ def load_spotitem_list(filename):
     # Create spotitem objects from XML
     spotitems = []
     for el in tree.findall('spotitem'):
-        print(el)
         spotitem = Spotitem(xml=el)
         spotitems.append(spotitem)
 

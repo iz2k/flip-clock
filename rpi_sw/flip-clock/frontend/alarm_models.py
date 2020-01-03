@@ -127,6 +127,8 @@ class Alarm:
 		self.name = ''
 		self.hour = 0
 		self.minute = 0
+		self.snooze_hh = 0
+		self.snooze_mm = 0
 		self.periodic = AlarmPeriodic()
 		self.source = AlarmSource()
 		self.volume = AlarmVolume()
