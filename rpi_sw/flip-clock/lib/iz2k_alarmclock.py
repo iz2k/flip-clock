@@ -1,6 +1,7 @@
 from frontend import alarm_models
 import os
 from datetime import datetime
+from rpi_ws281x import Color
 
 class alarmclock:
 
@@ -53,6 +54,8 @@ class alarmclock:
 				print('[alarm] Alarm ' + alarm.name + ' going off')
 				alarm.status = 'off'
 				self.sound.play('off')
+				# Put light OFF		
+				self.strip.colorWipe(Color(0, 0, 0))
 
 	def play(self, alarm):
 		# Determine source
@@ -69,7 +72,8 @@ class alarmclock:
 			self.spotify.kill_spotify()
 			self.radio.tune_freq(freq=alarm.source.item)
 		
-		# Put light ON
+		# Put light ON		
+		self.strip.colorWipe(Color(30, 5, 0))
 
 	def run(self):
 		now = datetime.now()

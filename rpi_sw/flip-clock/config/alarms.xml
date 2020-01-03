@@ -36,7 +36,7 @@
   <alarm>
     <name>kk</name>
     <hour>10</hour>
-    <minute>43</minute>
+    <minute>56</minute>
     <periodic>
       <enable>True</enable>
       <monday>True</monday>
