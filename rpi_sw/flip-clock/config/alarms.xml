@@ -20,12 +20,12 @@
     </source>
     <volume>
       <start>10</start>
-      <end>100</end>
-      <ramptime>1</ramptime>
+      <end>50</end>
+      <ramptime>5</ramptime>
     </volume>
     <snooze>
-      <enable>False</enable>
-      <time>1</time>
+      <enable>True</enable>
+      <time>10</time>
     </snooze>
     <weather>
       <enable>False</enable>
@@ -35,8 +35,8 @@
   </alarm>
   <alarm>
     <name>kk</name>
-    <hour>10</hour>
-    <minute>56</minute>
+    <hour>18</hour>
+    <minute>49</minute>
     <periodic>
       <enable>True</enable>
       <monday>True</monday>
@@ -49,13 +49,13 @@
     </periodic>
     <source>
       <type>spotify</type>
-      <item>spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p</item>
+      <item>spotify:playlist:37i9dQZF1DWXmlLSKkfdAk</item>
       <randomize>True</randomize>
     </source>
     <volume>
-      <start>10</start>
-      <end>100</end>
-      <ramptime>1</ramptime>
+      <start>30</start>
+      <end>60</end>
+      <ramptime>2</ramptime>
     </volume>
     <snooze>
       <enable>True</enable>

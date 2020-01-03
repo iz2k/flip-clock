@@ -1,7 +1,13 @@
 from frontend import alarm_models
 import os
 from datetime import datetime
+import time
 from rpi_ws281x import Color
+
+def currentseconds():
+	now=datetime.now()
+	return time.mktime(now.timetuple())
+
 
 class alarmclock:
 
@@ -31,14 +37,7 @@ class alarmclock:
 					print('[alarm] Alarm ' + alarm.name + ' going to snooze wait mode')
 					alarm.status = 'snooze_wait'
 					# Calculate Snooze time
-					now = datetime.now()
-					alarm.snooze_hh = now.hour
-					alarm.snooze_mm = now.minute + alarm.snooze.time
-					if alarm.snooze_mm > 59:
-						alarm.snooze_mm -= 60
-						alarm.snooze_hh += 1
-						if alarm.snooze_hh > 23:
-							alarm.snooze_hh -= 24
+					alarm.snooze.next_timestamp = currentseconds() + alarm.snooze.time*60
 				else:
 					print('[alarm] Alarm ' + alarm.name + ' going off')
 					alarm.status = 'off'
@@ -58,6 +57,11 @@ class alarmclock:
 				self.strip.colorWipe(Color(0, 0, 0))
 
 	def play(self, alarm):
+		# Set volume start volume and get timestamps
+		alarm.volume.current = alarm.volume.start
+		alarm.volume.tstart = currentseconds()
+		alarm.volume.tstop = alarm.volume.tstart + alarm.volume.ramptime*60
+		self.sound.set_volume(alarm.volume.current)
 		# Determine source
 		if alarm.source.type=='spotify':
 			print('[alarm] Alarm ' + alarm.name + ' triggered! (spotify)')
@@ -80,6 +84,7 @@ class alarmclock:
 		hh = now.hour
 		mm = now.minute
 		wd = now.weekday()
+		current_timestamp = currentseconds()
 		# Go through all alarms
 		for alarm in self.alarms:
 			# Check alarm is enabled
@@ -93,10 +98,20 @@ class alarmclock:
 							# Trigger alarm
 							alarm.status = 'on'
 							self.play(alarm)
+				# Check if alarm is ON
+				elif alarm.status == 'on' or alarm.status == 'snooze_on':
+					# Check if volume ramp still applies
+					if alarm.volume.tstop >= current_timestamp:
+						newvol=int(alarm.volume.start + (alarm.volume.end - alarm.volume.start)/(alarm.volume.tstop - alarm.volume.tstart) * (current_timestamp - alarm.volume.tstart))
+						if newvol != alarm.volume.current:
+							print('[alarm] Ramping up volume: ' + str(newvol))
+							alarm.volume.current = newvol
+							self.sound.set_volume(newvol)
+						# Check if volume update applies
 				# Check if alarm is in snooze
 				elif alarm.status == 'snooze_wait':
 					# Check current time is snooze time
-					if alarm.snooze_hh == hh and alarm.snooze_mm == mm:
+					if alarm.snooze.next_timestamp <= current_timestamp:
 						# Trigger alarm
 						print('[alarm] Alarm ' + alarm.name + ' going to snooze on mode')
 						alarm.status = 'snooze_on'

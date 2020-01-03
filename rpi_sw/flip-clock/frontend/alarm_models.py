@@ -67,6 +67,9 @@ class AlarmVolume:
 		self.start = 50
 		self.end = 50
 		self.ramptime = 0
+		self.current=0
+		self.tstart=None
+		self.tstop=None
 
 	def parseForm(self, form):
 		self.start = form.alarm_vol_start.data
@@ -87,6 +90,7 @@ class AlarmSnooze:
 	def __init__(self):
 		self.enable = False
 		self.time = 10
+		self.next_timestamp = None
 
 	def parseForm(self, form):
 		self.enable = form.alarm_snz_enable.data
@@ -127,8 +131,6 @@ class Alarm:
 		self.name = ''
 		self.hour = 0
 		self.minute = 0
-		self.snooze_hh = 0
-		self.snooze_mm = 0
 		self.periodic = AlarmPeriodic()
 		self.source = AlarmSource()
 		self.volume = AlarmVolume()
