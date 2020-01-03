@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 import time
 from rpi_ws281x import Color
+from queue import Queue
 
 def currentseconds():
 	now=datetime.now()
@@ -17,6 +18,7 @@ class alarmclock:
 		self.radio = radio
 		self.strip = strip
 		self.clock = clock
+		self.queue = Queue()
 		self.reload_xml()
 
 	def reload_xml(self):
@@ -37,7 +39,7 @@ class alarmclock:
 					print('[alarm] Alarm ' + alarm.name + ' going to snooze wait mode')
 					alarm.status = 'snooze_wait'
 					# Calculate Snooze time
-					alarm.snooze.next_timestamp = currentseconds() + alarm.snooze.time*60
+					alarm.snooze.timestamp = currentseconds() + alarm.snooze.time*60
 				else:
 					print('[alarm] Alarm ' + alarm.name + ' going off')
 					alarm.status = 'off'
@@ -57,11 +59,16 @@ class alarmclock:
 				self.strip.colorWipe(Color(0, 0, 0))
 
 	def play(self, alarm):
-		# Set volume start volume and get timestamps
+		# Set volume start volume
 		alarm.volume.current = alarm.volume.start
-		alarm.volume.tstart = currentseconds()
-		alarm.volume.tstop = alarm.volume.tstart + alarm.volume.ramptime*60
 		self.sound.set_volume(alarm.volume.current)
+		# Set timestamps
+		current_timestamp = currentseconds()
+		alarm.volume.tstart = current_timestamp
+		alarm.volume.tstop = current_timestamp + alarm.volume.ramptime*60
+		alarm.weather.timestamp = current_timestamp + alarm.weather.delay*60
+		# Reset flags
+		alarm.weather.executed = False
 		# Determine source
 		if alarm.source.type=='spotify':
 			print('[alarm] Alarm ' + alarm.name + ' triggered! (spotify)')
@@ -69,12 +76,14 @@ class alarmclock:
 			self.radio.kill_radio()
 			self.spotify.kill_spotify()
 			self.spotify.play_URI(URI=alarm.source.item, shuffle=alarm.source.randomize)
+			self.queue.put('spotify')
 		elif alarm.source.type=='radio':
 			print('[alarm] Alarm ' + alarm.name + ' triggered! (radio)')
 			# Kill previous playbacks if exist
 			self.radio.kill_radio()
 			self.spotify.kill_spotify()
 			self.radio.tune_freq(freq=alarm.source.item)
+			self.queue.put('radio')
 		
 		# Put light ON		
 		self.strip.colorWipe(Color(30, 5, 0))
@@ -101,17 +110,32 @@ class alarmclock:
 				# Check if alarm is ON
 				elif alarm.status == 'on' or alarm.status == 'snooze_on':
 					# Check if volume ramp still applies
-					if alarm.volume.tstop >= current_timestamp:
-						newvol=int(alarm.volume.start + (alarm.volume.end - alarm.volume.start)/(alarm.volume.tstop - alarm.volume.tstart) * (current_timestamp - alarm.volume.tstart))
-						if newvol != alarm.volume.current:
-							print('[alarm] Ramping up volume: ' + str(newvol))
-							alarm.volume.current = newvol
-							self.sound.set_volume(newvol)
-						# Check if volume update applies
+					if current_timestamp <= alarm.volume.tstop:
+						# Check if user has manually modified volume
+						if self.sound.volume != alarm.volume.current:
+							if alarm.volume.current != -1:
+								alarm.volume.current = -1
+								print('Volume ramp-up cancelled due to user interaction')
+						else:
+							newvol=int(alarm.volume.start + (alarm.volume.end - alarm.volume.start)/(alarm.volume.tstop - alarm.volume.tstart) * (current_timestamp - alarm.volume.tstart))
+							if newvol != alarm.volume.current:
+								print('[alarm] Ramping up volume: ' + str(newvol))
+								alarm.volume.current = newvol
+								self.sound.set_volume(newvol)
+					# Check if weather forecsat is enabled and not executed
+					if alarm.weather.enable == True and alarm.weather.executed == False:
+						if current_timestamp >= alarm.weather.timestamp:
+							self.sound.say_text(alarm.weather.greeting + 
+								'El tiempo ahora es ' +
+								self.clock.forecast_currently() + 
+								', con pronóstico ' +
+								self.clock.forecast_hourly(), lang='es')
+							alarm.weather.executed = True
+					
 				# Check if alarm is in snooze
 				elif alarm.status == 'snooze_wait':
 					# Check current time is snooze time
-					if alarm.snooze.next_timestamp <= current_timestamp:
+					if alarm.snooze.timestamp <= current_timestamp:
 						# Trigger alarm
 						print('[alarm] Alarm ' + alarm.name + ' going to snooze on mode')
 						alarm.status = 'snooze_on'

@@ -90,7 +90,7 @@ class AlarmSnooze:
 	def __init__(self):
 		self.enable = False
 		self.time = 10
-		self.next_timestamp = None
+		self.timestamp = None
 
 	def parseForm(self, form):
 		self.enable = form.alarm_snz_enable.data
@@ -109,6 +109,8 @@ class AlarmWeather:
 		self.enable = False
 		self.greeting = ''
 		self.delay = 1
+		self.timestamp = None
+		self.executed = False
 
 	def parseForm(self, form):
 		self.enable = form.alarm_wth_enable.data

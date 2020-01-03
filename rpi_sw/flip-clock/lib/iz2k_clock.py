@@ -17,6 +17,7 @@ class clock:
 	
 	def __init__(self):
 		self.comport = Serial('/dev/ttyS0', baudrate=115200)
+		self.forecast = None
 
 	def update_time(self):
 		command =  'T' + str(self.now.hour).zfill(2) + str(self.now.minute).zfill(2) + '\r'
@@ -27,14 +28,18 @@ class clock:
 		# Get weather
 		print("Updating weather:")
 		darksky = DarkSky('***REMOVED***')
-		forecast = darksky.get_forecast(43.312691, -1.993332)
+		self.forecast = darksky.get_forecast(43.312691, -1.993332, lang='es')
 
-		print(" >> Summary: ", forecast.currently.summary)
-		print(" >> Icon: ", forecast.currently.icon)
-		print(" >> Temperature: ", forecast.currently.temperature)
-		print(" >> Humidity: ", forecast.currently.humidity)
-		print(" >> Wind Speed: ", forecast.currently.wind_speed)
-		print(" >> Pressure: ", forecast.currently.pressure)
+		print(" >> Summary: ", self.forecast.currently.summary)
+		print(" >> Icon: ", self.forecast.currently.icon)
+		print(" >> Temperature: ", self.forecast.currently.temperature)
+		print(" >> Humidity: ", self.forecast.currently.humidity)
+		print(" >> Wind Speed: ", self.forecast.currently.wind_speed)
+		print(" >> Pressure: ", self.forecast.currently.pressure)
+
+		print(' >> Current summary: ' + self.forecast.currently.summary)
+		#print(' >> Minutely summary: ' + self.forecast.minutely.summary)
+		print(' >> Hourly summary: ' + self.forecast.hourly.summary)
 
 		print("Get icon index:")
 		weather_icons = {
@@ -49,12 +54,30 @@ class clock:
 			"rain":"09",
 			"snow":"10",
 		}
-		weather_icon_index=weather_icons.get(forecast.currently.icon)
+		weather_icon_index=weather_icons.get(self.forecast.currently.icon)
 		print(" >> Icon index: ", weather_icon_index)
 		
 		command =  'W' + weather_icon_index + '\r'
 		print("Weather command: ", command)
 		self.comport.write(bytes(command, 'UTF-8'))
+	
+	def forecast_currently(self):
+		if self.forecast is not None:
+			return self.forecast.currently.summary
+		else:
+			return 'No hay datos disponibles.'
+			
+	def forecast_minutely(self):
+		if self.forecast is not None:
+			return self.forecast.minutely.summary
+		else:
+			return 'No hay datos disponibles.'
+			
+	def forecast_hourly(self):
+		if self.forecast is not None:
+			return self.forecast.hourly.summary
+		else:
+			return 'No hay datos disponibles.'
 	
 	def run(self):
 		self.now = datetime.now()

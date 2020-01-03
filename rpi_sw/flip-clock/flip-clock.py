@@ -142,3 +142,10 @@ while True:
 			spotify.reload_xml()
 		elif frontend_msg == 'alarm_update':
 			alarmclock.reload_xml()
+	if alarmclock.queue.empty() is False:
+		alarmclock_msg = alarmclock.queue.get()
+		if alarmclock_msg == 'spotify':
+			status='spotify'
+		elif alarmclock_msg == 'radio':
+			status='radio'
+			

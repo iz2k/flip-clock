@@ -34,9 +34,9 @@
     </weather>
   </alarm>
   <alarm>
-    <name>kk</name>
-    <hour>18</hour>
-    <minute>49</minute>
+    <name>pruebas</name>
+    <hour>19</hour>
+    <minute>42</minute>
     <periodic>
       <enable>True</enable>
       <monday>True</monday>
@@ -49,22 +49,22 @@
     </periodic>
     <source>
       <type>spotify</type>
-      <item>spotify:playlist:37i9dQZF1DWXmlLSKkfdAk</item>
+      <item>spotify:playlist:1sWZe1CRbscVwk1x8Dfb6p</item>
       <randomize>True</randomize>
     </source>
     <volume>
       <start>30</start>
       <end>60</end>
-      <ramptime>2</ramptime>
+      <ramptime>1</ramptime>
     </volume>
     <snooze>
       <enable>True</enable>
       <time>1</time>
     </snooze>
     <weather>
-      <enable>False</enable>
-      <greeting>hola</greeting>
-      <delay>1</delay>
+      <enable>True</enable>
+      <greeting>Hola, Ibón.</greeting>
+      <delay>0</delay>
     </weather>
   </alarm>
 </alarms>

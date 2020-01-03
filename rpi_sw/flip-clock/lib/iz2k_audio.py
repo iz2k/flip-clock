@@ -86,7 +86,7 @@ class sound:
 		return self.mute
 		
 	def say_text(self, text, lang='en'):
-		raw_cmd='mplayer -ao alsa -af volume=10 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob'
+		raw_cmd='mplayer -ao alsa -af volume=13 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob'
 		raw_cmd+='&tl='
 		raw_cmd+=lang
 		raw_cmd+='&q='
