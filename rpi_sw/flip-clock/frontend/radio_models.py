@@ -28,7 +28,7 @@ class RadioStation:
 
 class RadioStationForm(Form):
 	idx = HiddenField()
-	freq = DecimalField('Frequency:', places=2, render_kw={"placeholder": "MHz", "style":"font-size:20px", "size":"1"})
+	freq = DecimalField('Frequency:', places=2, render_kw={"placeholder": "MHz", "style":"font-size:20px", "size":"2"})
 	name = StringField('Name', render_kw={"placeholder": "Radio Station Name", "style":"font-size:20px", "size":"17"})
 	delete = SubmitField(label='Delete')
 	update = SubmitField(label='Update')
