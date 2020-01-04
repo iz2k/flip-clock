@@ -10,7 +10,7 @@
       <wednesday>True</wednesday>
       <thursday>True</thursday>
       <friday>True</friday>
-      <saturday>True</saturday>
+      <saturday>False</saturday>
       <sunday>False</sunday>
     </periodic>
     <source>
@@ -28,8 +28,8 @@
       <time>10</time>
     </snooze>
     <weather>
-      <enable>False</enable>
-      <greeting>hola</greeting>
+      <enable>True</enable>
+      <greeting>Egunón, Ibón eta Ana.</greeting>
       <delay>1</delay>
     </weather>
   </alarm>
@@ -44,8 +44,8 @@
       <wednesday>True</wednesday>
       <thursday>True</thursday>
       <friday>True</friday>
-      <saturday>True</saturday>
-      <sunday>True</sunday>
+      <saturday>False</saturday>
+      <sunday>False</sunday>
     </periodic>
     <source>
       <type>spotify</type>

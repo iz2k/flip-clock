@@ -175,9 +175,9 @@ class Alarm:
 
 
 class AlarmForm(Form):
-	name = StringField(label='Name')
-	hour = IntegerField(label='Hour')
-	minute = IntegerField(label='Minute')
+	name = StringField(label='Name', render_kw={"placeholder": "Alarm Name", "font-size":"20px", "size":"23"})
+	hour = IntegerField(label='Hour', render_kw={"placeholder": "HH", "size":"1"})
+	minute = IntegerField(label='Minute', render_kw={"placeholder": "MM", "size":"1"})
 	alarm_period_enable = BooleanField(label='Enable periodic alarm')
 	alarm_period_monday = BooleanField(label='Monday')
 	alarm_period_tuesday = BooleanField(label='Tuesday')
@@ -189,16 +189,16 @@ class AlarmForm(Form):
 	type_choices = [('radio', 'radio'),
 			   ('spotify', 'spotify')]
 	alarm_src_type = SelectField('Type', choices=type_choices)
-	alarm_src_item = StringField(label='Source item')
+	alarm_src_item = StringField(label='Source item', render_kw={"placeholder": "URI/Freq.", "size":"35"})
 	alarm_src_random = BooleanField(label='random')
-	alarm_vol_start = IntegerField(label='Start volume (%)')
-	alarm_vol_end = IntegerField(label='End volume (%)')
-	alarm_vol_ramptime = IntegerField(label='Ramptime (min)')
+	alarm_vol_start = IntegerField(label='Start volume (%)', render_kw={"placeholder": "0-100", "size":"1"})
+	alarm_vol_end = IntegerField(label='End volume (%)', render_kw={"placeholder": "0-100", "size":"1"})
+	alarm_vol_ramptime = IntegerField(label='Ramptime (min)', render_kw={"placeholder": "Rmp", "size":"1"})
 	alarm_snz_enable = BooleanField(label='Enable snooze')
-	alarm_snz_time = IntegerField(label='Snooze time (min)')
+	alarm_snz_time = IntegerField(label='Snooze time (min)', render_kw={"placeholder": "Snz", "size":"1"})
 	alarm_wth_enable = BooleanField(label='Enable weather forecast')
-	alarm_wth_greeting = StringField(label='Greeting')
-	alarm_wth_delay = IntegerField(label='Weather delay (min)')
+	alarm_wth_greeting = StringField(label='Greeting', render_kw={"placeholder": "Greeting", "size":"35"})
+	alarm_wth_delay = IntegerField(label='Weather delay (min)', render_kw={"placeholder": "Wth", "size":"1"})
 	idx = HiddenField()
 	delete = SubmitField(label='Delete')
 	update = SubmitField(label='Update')
