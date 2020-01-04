@@ -85,50 +85,38 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-#name, #hour, #minute {
-	font-size: 20pt;
-}
-
-table.alarmformtablenew {
+table.formtablenew {
 	background-color: #fffddb;
-	width: 50%;
 	border: 1px solid black;
 }
-table.alarmformtable {
+table.formtable {
 	background-color: #d3f5d4;
-	width: 50%;
 	border: 1px solid black;
 }
 
 input[type=submit][value=New] {
-  width: 80%;
-  height: 80%;
+  width: 100;
+  height: 100%;
   background-color: #a0dba2;
   color: black;
-  padding: 20px 20px;
-  margin: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 input[type=submit][value=Update] {
-  width: 80%;
-  height: 80%;
+  width: 100;
+  height: 100%;
   background-color: #98a5fa;
   color: black;
-  padding: 20px 20px;
-  margin: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 input[type=submit][value=Delete] {
-  width: 80%;
-  height: 80%;
+  width: 100;
+  height: 100%;
   background-color: #fcb8b8;
   color: black;
-  padding: 20px 20px;
-  margin: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;

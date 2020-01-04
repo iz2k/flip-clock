@@ -1,71 +1,31 @@
 <doctype html>
 <head>
-    <title>Spotify</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<title>Spotify</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 {% from "_navbar.html" import render_navbar %}
-    {{ render_navbar('spotify') }}
-
-<h2>Spotify configuration</h2>
-
-<p><p>
+	{{ render_navbar('spotify') }}
 
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+	{% if messages %}
+	<ul class=flashes>
+	{% for message in messages %}
+		<li>{{ message }}</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
 {% endwith %}
 
 {% from "_formhelpers.html" import render_field_raw, render_field %}
-  Add new Spotify item:
-    <form method=post>
-        <table border="1px">
-            <tr>
-                {{ render_field(sformnew.name) }}
-            </tr>
-            <tr>
-                {{ render_field(sformnew.URI) }}
-            </tr>
-            <tr>
-                {{ render_field(sformnew.shuffle) }}
-            </tr>
-            <tr>
-			  <td colspan=2 align='center'>
-                {{ render_field_raw(sformnew.new) }}
-			  </td>
-            </tr>
-        </table>
-    </form>
-  Stored Spotify items:
+{% from "_spotify.html" import render_spotitem %}
+<h2>Add new Spotify item:</h2>
+		{{ render_spotitem(sformnew, type='new', class='formtablenew') }}
+<h2>Stored Spotify items:</h2>
 <ul style="list-style-type:none;">
-  <!-- For loop logic of jinja template -->
 {%for i in range(0, nsforms)%}
-    <li>
-    <form method=post>
-            <table border="1px">
-                <tr>
-                    {{ render_field(sforms[i].name) }}
-                </tr>
-                <tr>
-                    {{ render_field(sforms[i].URI) }}
-                </tr>
-                <tr>
-                    {{ render_field(sforms[i].shuffle) }}
-                </tr>
-                <tr>
-				  <td colspan=2 align='center'>
-								{{ render_field_raw(sforms[i].idx) }}
-								{{ render_field_raw(sforms[i].update) }}
-								{{ render_field_raw(sforms[i].delete) }}
-				  </td>
-                </tr>
-        </table>
-    </form>
-    </li>
+	<li>
+		{{ render_spotitem(sforms[i], type='stored', class='formtable') }}
+	</li>
 {%endfor%}
 </ul>

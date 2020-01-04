@@ -30,9 +30,9 @@ class Spotitem:
 
 class SpotitemForm(Form):
 	idx = HiddenField()
-	name = StringField('Name')
-	URI = StringField('URI')
-	shuffle = BooleanField('shuffle')
+	name = StringField('Name', render_kw={"placeholder": "Spotify item Name", "style":"font-size:20px", "size":"17"})
+	URI = StringField('URI', render_kw={"placeholder": "URI", "size":"40"})
+	shuffle = BooleanField('shuffle', render_kw={"placeholder": "Alarm Name", "font-size":"20px", "size":"23"})
 	delete = SubmitField(label='Delete')
 	update = SubmitField(label='Update')
 	new = SubmitField(label='New')

@@ -175,9 +175,9 @@ class Alarm:
 
 
 class AlarmForm(Form):
-	name = StringField(label='Name', render_kw={"placeholder": "Alarm Name", "font-size":"20px", "size":"23"})
-	hour = IntegerField(label='Hour', render_kw={"placeholder": "HH", "size":"1"})
-	minute = IntegerField(label='Minute', render_kw={"placeholder": "MM", "size":"1"})
+	name = StringField(label='Name', render_kw={"placeholder": "Alarm Name", "style":"font-size:30px", "size":"23"})
+	hour = IntegerField(label='Hour', render_kw={"placeholder": "HH","style":"font-size:30px", "size":"1"})
+	minute = IntegerField(label='Minute', render_kw={"placeholder": "MM","style":"font-size:30px", "size":"1"})
 	alarm_period_enable = BooleanField(label='Enable periodic alarm')
 	alarm_period_monday = BooleanField(label='Monday')
 	alarm_period_tuesday = BooleanField(label='Tuesday')

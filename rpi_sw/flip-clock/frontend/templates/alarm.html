@@ -20,12 +20,12 @@
 {% from "_formhelpers.html" import render_field_raw, render_field %}
 {% from "_alarm.html" import render_alarm %}
 	<h2>Add new Alarm:</h2>
-		{{ render_alarm(aformnew, type='new', class='alarmformtablenew') }}
+		{{ render_alarm(aformnew, type='new', class='formtablenew') }}
 	<h2>Stored Alarms:</h2>
 <ul style="list-style-type:none;">
 {%for i in range(0, nalarms)%}
 	<li>
-		{{ render_alarm(aforms[i], type='stored', class='alarmformtable') }}
+		{{ render_alarm(aforms[i], type='stored', class='formtable') }}
 	</li>
 {%endfor%}
 </ul>
