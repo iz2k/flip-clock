@@ -17,7 +17,6 @@
 	{% endif %}
 {% endwith %}
 
-{% from "_formhelpers.html" import render_field_raw, render_field %}
 {% from "_spotify.html" import render_spotitem %}
 <h2>Add new Spotify item:</h2>
 		{{ render_spotitem(sformnew, type='new', class='formtablenew') }}

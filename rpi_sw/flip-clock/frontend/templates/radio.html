@@ -18,36 +18,20 @@
   {% endif %}
 {% endwith %}
 
-<iframe width="230"
-    height="190"
-    src=/tuneradio>
-</iframe>
-    <p>
-{% from "_formhelpers.html" import render_field_raw %}
-  Add new Radio Stations:
-  <form method=post>
-    {{ render_field_raw(sformnew.freq) }}
-    {{ render_field_raw(sformnew.name) }}
-    {{ render_field_raw(sformnew.new) }}
-  </form>
-  Stored Radio Stations:
+<div style="right: 0px; border: 0px none; height: 200px; position: fixed; width: 230px; overflow: hidden; top: 70">
+	<iframe src=/tuneradio scrolling="no" style="border: 0px none; height: 190px">
+	</iframe>
+</div>
+
+{% from "_radio.html" import render_radio %}
+<h2>Add new Radio Stations:</h2>
+		{{ render_radio(rformnew, type='new', class='formtablenew') }}
+<h2>Stored Radio Stations:</h2>
 <ul style="list-style-type:none;">
-  <!-- For loop logic of jinja template -->
-{%for i in range(0, nstations)%}
-    <li>
-      <form method=post>
-       {{ render_field_raw(sform[i].freq) }}
-       {{ render_field_raw(sform[i].name) }}
-       {{ render_field_raw(sform[i].delete) }}
-       {{ render_field_raw(sform[i].update) }}
-       {{ render_field_raw(sform[i].up) }}
-       {{ render_field_raw(sform[i].down) }}
-       {{ render_field_raw(sform[i].setpos) }}
-       {{ render_field_raw(sform[i].pos) }}
-       {{ render_field_raw(sform[i].idx) }}
-       {{ render_field_raw(sform[i].lastfreq) }}
-     </form>
-    </li>
+{%for i in range(0, nrforms)%}
+	<li>
+		{{ render_radio(rforms[i], type='stored', class='formtable') }}
+	</li>
 {%endfor%}
 </ul>
 

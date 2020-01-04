@@ -56,7 +56,7 @@ def radio_index():
 	ctrlform = RadioControlForm(None)
 	ctrlform.freq.data = lastfreq
 
-	return render_template('radio.html', cform=ctrlform, sform=radioforms, nstations=len(radioforms), sformnew=RadioStationForm(None))
+	return render_template('radio.html', rforms=radioforms, nrforms=len(radioforms), rformnew=RadioStationForm(None))
 
 @app.route('/tuneradio', methods=['GET', 'POST'])
 def tune_radio():
