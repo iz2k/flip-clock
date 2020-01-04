@@ -5,6 +5,7 @@ from .app import app
 from . import alarm_frontend
 from . import spotify_frontend
 from . import radio_frontend
+from . import clock_frontend
 
 @app.route('/css/<path:path>')
 def send_css(path):

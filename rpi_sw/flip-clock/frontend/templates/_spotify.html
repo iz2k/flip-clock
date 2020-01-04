@@ -1,0 +1,38 @@
+{% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
+{% macro render_spotitem(sform, type, class) %}
+<form method=post>
+	<table cellspacing="0" class='{{ class }}'>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<table>
+							{{ render_field_wol(sform.name) }}
+							{{ render_switch(sform.shuffle) }}
+							<td>Shuffle</td>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					{{ render_field_wol(sform.URI)}}
+					{{ render_field_raw(sform.idx) }}
+				</tr>
+			</table>
+		</td>
+		<td>
+		<table width=100>
+			{% if type=='new' %}
+			<td height=75>{{ render_field_raw(sform.new) }}</td>
+			{% else %}
+			<tr>
+			<td height=50>{{ render_field_raw(sform.update) }}</td>
+			</tr>
+			<tr>
+			<td height=25>{{ render_field_raw(sform.delete) }}</td>
+			</tr>
+			{% endif %}
+		</table>
+		</td>
+	</table>
+</form>
+{% endmacro %}

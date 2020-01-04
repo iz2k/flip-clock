@@ -1,0 +1,54 @@
+{% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
+{% macro render_radio(rform, type, class) %}
+<form method=post>
+	<table cellspacing="0" class='{{ class }}'>
+		<td>
+			<table>
+				<tr>
+					{{ render_field_wol(rform.name) }}
+				</tr>
+				<tr>
+					<td> Frequency: 
+					{{ render_field_raw(rform.freq) }}
+					MHz
+					{{ render_field_raw(rform.idx) }}
+					{{ render_field_raw(rform.lastfreq) }}
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+		<table width=100>
+			{% if type=='new' %}
+			<td height=50>{{ render_field_raw(rform.new) }}</td>
+			{% else %}
+			<tr>
+			<td height=25>{{ render_field_raw(rform.update) }}</td>
+			</tr>
+			<tr>
+			<td height=25>{{ render_field_raw(rform.delete) }}</td>
+			</tr>
+			{% endif %}
+		</table>
+		</td>
+		{% if type!='new' %}
+		<td>
+		<table width=50>
+			<td height=25>{{ render_field_raw(rform.up) }}</td>
+			<tr>
+			<td height=25>{{ render_field_raw(rform.down) }}</td>
+			</tr>
+		</table>
+		</td>
+		<td>
+		<table width=50>
+			<td height=25>{{ render_field_raw(rform.setpos) }}</td>
+			<tr>
+			<td height=25>{{ render_field_raw(rform.pos) }}</td>
+			</tr>
+		</table>
+		</td>
+		{% endif %}
+	</table>
+</form>
+{% endmacro %}

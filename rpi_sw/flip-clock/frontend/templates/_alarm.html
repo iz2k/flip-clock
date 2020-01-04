@@ -1,0 +1,114 @@
+{% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
+{% macro render_alarm(aform, type, class) %}
+<form method=post>
+	<table cellspacing="0" class='{{ class }}'>
+	<td><table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						{{ render_switch(aform.alarm_period_enable) }}
+						{{ render_field_wol(aform.name) }}
+						{{ render_field_wol(aform.hour)}}
+						{{ render_field_wol(aform.minute) }}
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width=100%>
+					<tr>
+							{{ render_switch(aform.alarm_period_monday) }}
+							{{ render_switch(aform.alarm_period_tuesday) }}
+							{{ render_switch(aform.alarm_period_wednesday) }}
+							{{ render_switch(aform.alarm_period_thursday) }}
+							{{ render_switch(aform.alarm_period_friday) }}
+							{{ render_switch(aform.alarm_period_saturday) }}
+							{{ render_switch(aform.alarm_period_sunday) }}
+					</tr>
+					<tr>
+						<td align='center'>Monday</td>
+						<td align='center'>Tuesday</td>
+						<td align='center'>Wednesday</td>
+						<td align='center'>Thursday</td>
+						<td align='center'>Friday</td>
+						<td align='center'>Saturday</td>
+						<td align='center'>Sunday</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<table width=100%>
+				<tr>
+					{{ render_field(aform.alarm_src_type) }}
+					{{ render_field(aform.alarm_src_item) }}
+					{{ render_switch(aform.alarm_src_random) }}
+					<td>Shuffle</td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width=100%>
+					<td width=30%>
+						<table>
+							<tr>
+								{{ render_field(aform.alarm_vol_start) }}
+							</tr>
+							<tr>
+								{{ render_field(aform.alarm_vol_end) }}
+							</tr>
+							<tr>
+								{{ render_field(aform.alarm_vol_ramptime) }}
+							</tr>
+						</table>
+					</td>
+					<td width=20%>
+						<table>
+						</table>
+					</td>
+					<td width=50%>
+						<table>
+							<tr>
+								{{ render_switch(aform.alarm_snz_enable) }}
+								{{ render_field(aform.alarm_snz_time) }}
+							</tr>
+						</table>
+					</td>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<table width=100%>
+				<tr>
+					{{ render_switch(aform.alarm_wth_enable) }}
+					{{ render_field_wol(aform.alarm_wth_greeting) }}
+					{{ render_field(aform.alarm_wth_delay) }}
+					{{ render_field_raw(aform.idx) }}
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table></td>
+	<td>
+		<table width=100>
+			{% if type=='new' %}
+			<td height=240>{{ render_field_raw(aform.new) }}</td>
+			{% else %}
+			<tr>
+			<td height=160>{{ render_field_raw(aform.update) }}</td>
+			</tr>
+			<tr>
+			<td height=80>{{ render_field_raw(aform.delete) }}</td>
+			</tr>
+			{% endif %}
+		</table>
+	</td>
+	</table>
+</form>
+{% endmacro %}

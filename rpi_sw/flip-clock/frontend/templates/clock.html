@@ -1,0 +1,53 @@
+<doctype html>
+<head>
+	<title>Clock</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+{% from "_navbar.html" import render_navbar %}
+	{{ render_navbar('clock') }}
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class=flashes>
+	{% for message in messages %}
+		<li>{{ message }}</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+{% endwith %}
+
+<h2>Control Flip Clock:</h2>
+{% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
+<form id="clockform" method=post>
+
+	{{ render_switch(cform.calibrating) }} 
+	
+	{% if cform.calibrating.data %}
+	<table cellspacing="0" class='{{ class }}'>
+		<tr>
+			{{ render_field_wol(cform.hh) }}
+			{{ render_field_wol(cform.mm) }}
+			{{ render_field_wol(cform.ww) }}
+		</tr>
+		<tr>
+			{{ render_field_wol(cform.set_hh) }}
+			{{ render_field_wol(cform.set_mm) }}
+			{{ render_field_wol(cform.set_ww) }}
+		</tr>
+		<tr>
+			{{ render_field_wol(cform.sync_hh) }}
+			{{ render_field_wol(cform.sync_mm) }}
+			{{ render_field_wol(cform.sync_ww) }}
+		</tr>
+			{{ render_field_wol(cform.cal_hh) }}
+			{{ render_field_wol(cform.cal_mm) }}
+			{{ render_field_wol(cform.cal_ww) }}
+		</tr>
+	</table>
+	{% else %}
+	<p>
+		In order to control the Flip Clock, enter calibration mode. Clock will stop showing current time during calibration.
+	</p>
+	{% endif %}
+</form>
