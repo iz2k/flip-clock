@@ -134,7 +134,7 @@ while True:
 	clock.run()
 	alarmclock.run()
 	time.sleep(0.5)	
-	if frontendqueue.empty() is False:
+	while frontendqueue.empty() is False:
 		frontend_msg=frontendqueue.get()
 		if frontend_msg == 'radio_update':
 			radio.reload_xml()
@@ -142,7 +142,17 @@ while True:
 			spotify.reload_xml()
 		elif frontend_msg == 'alarm_update':
 			alarmclock.reload_xml()
-	if alarmclock.queue.empty() is False:
+		elif frontend_msg == 'clock-calibration-on':
+			clock.calibration(True)
+		elif frontend_msg == 'clock-calibration-off':
+			clock.calibration(False)
+		elif 'clock-set' in frontend_msg:
+			clock.set(frontend_msg)
+		elif 'clock-sync' in frontend_msg:
+			clock.sync(frontend_msg)
+		elif 'clock-cal' in frontend_msg:
+			clock.cal(frontend_msg)
+	while alarmclock.queue.empty() is False:
 		alarmclock_msg = alarmclock.queue.get()
 		if alarmclock_msg == 'spotify':
 			status='spotify'

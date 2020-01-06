@@ -5,3 +5,4 @@ from queue import Queue
 
 app = Flask(__name__)
 frontendqueue = Queue()
+clockcalibration = Queue()

@@ -175,3 +175,37 @@ input[type=submit][value='Set'] {
 input[type=submit][value='Set']:hover {
   background-color: #fff21c;
 }
+
+input[type=submit][value='Set HH'],
+input[type=submit][value='Set MM'],
+input[type=submit][value='Set WW'],
+input[type=submit][value='Sync HH'],
+input[type=submit][value='Sync MM'],
+input[type=submit][value='Sync WW'],
+input[type=submit][value='Cal HH'],
+input[type=submit][value='Cal MM'],
+input[type=submit][value='Cal WW']
+ {
+  width: 75;
+  height: 30;
+  background-color: #ffdd87;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+input[type=submit][value='Set HH']:hover ,
+input[type=submit][value='Set MM']:hover ,
+input[type=submit][value='Set WW']:hover ,
+input[type=submit][value='Sync HH']:hover ,
+input[type=submit][value='Sync MM']:hover ,
+input[type=submit][value='Sync WW']:hover ,
+input[type=submit][value='Cal HH']:hover ,
+input[type=submit][value='Cal MM']:hover ,
+input[type=submit][value='Cal WW']:hover 
+{
+  background-color: #fcbc19;
+  color: white;
+}

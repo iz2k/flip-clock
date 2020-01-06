@@ -3,6 +3,7 @@ from serial import Serial
 from datetime import datetime
 from darksky.api import DarkSky, DarkSkyAsync
 from darksky.types import languages, units, weather
+from frontend.app import clockcalibration
 	
 class clock:
 	
@@ -18,7 +19,62 @@ class clock:
 	def __init__(self):
 		self.comport = Serial('/dev/ttyS0', baudrate=115200)
 		self.forecast = None
+		self.calibrating=False
+		clockcalibration.put(False)
 
+	def calibration(self, status):
+		if status==True and self.calibrating==False:
+			print('[clock] Calibration enabled')
+			self.calibrating=True
+		elif status==False and self.calibrating==True:
+			print('[clock] Calibration disabled')
+			self.calibrating=False
+			cmd = 'r'
+			cmd += '\r'
+			print("[clock] Run command: ", cmd)
+			self.comport.write(bytes(cmd, 'UTF-8'))
+		
+		clockcalibration.put(self.calibrating)
+
+	def set(self, msg):
+		print(msg)
+		if 'clock-set-HH-' in msg:
+			cmd = msg.replace('clock-set-HH-', 'h')
+		elif 'clock-set-MM-' in msg:
+			cmd = msg.replace('clock-set-MM-', 'm')
+		elif 'clock-set-WW-' in msg:
+			cmd = msg.replace('clock-set-WW-', 'w')
+		
+		cmd += '\r'
+		print("[clock] Set command: ", cmd)
+		self.comport.write(bytes(cmd, 'UTF-8'))
+		
+	
+	def sync(self, msg):
+		print(msg)
+		if 'clock-sync-HH' in msg:
+			cmd = 'sh'
+		elif 'clock-sync-MM' in msg:
+			cmd = 'sm'
+		elif 'clock-sync-WW' in msg:
+			cmd = 'sw'
+		
+		cmd += '\r'
+		print("[clock] Sync command: ", cmd)
+		self.comport.write(bytes(cmd, 'UTF-8'))
+		
+	def cal(self, msg):
+		print(msg)
+		if 'clock-cal-HH' in msg:
+			cmd = msg.replace('clock-cal-HH-', 'ch')
+		elif 'clock-cal-MM' in msg:
+			cmd = msg.replace('clock-cal-MM-', 'cm')
+		elif 'clock-cal-WW' in msg:
+			cmd = msg.replace('clock-cal-WW-', 'cw')
+		
+		cmd += '\r'
+		print("[clock] Cal command: ", cmd)
+		self.comport.write(bytes(cmd, 'UTF-8'))
 	def update_time(self):
 		command =  'T' + str(self.now.hour).zfill(2) + str(self.now.minute).zfill(2) + '\r'
 		print("Updating time: ", command)
@@ -80,17 +136,18 @@ class clock:
 			return 'No hay datos disponibles.'
 	
 	def run(self):
-		self.now = datetime.now()
-		if(self.now.minute != self.last_mm):
-			self.last_mm = self.now.minute
-			self.update_time()
-			
-		if self.next_ww == self.WEATHER_UPDATE_RATE:
-			self.next_ww = 0
-			self.update_weather()
-		else:
-			if self.now.second != self.last_ss:
-				self.last_ss = self.now.second
-				self.next_ww += 1
+		if(self.calibrating==False):
+			self.now = datetime.now()
+			if(self.now.minute != self.last_mm):
+				self.last_mm = self.now.minute
+				self.update_time()
+				
+			if self.next_ww == self.WEATHER_UPDATE_RATE:
+				self.next_ww = 0
+				self.update_weather()
+			else:
+				if self.now.second != self.last_ss:
+					self.last_ss = self.now.second
+					self.next_ww += 1
 		
 		

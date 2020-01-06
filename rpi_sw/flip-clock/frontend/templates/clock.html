@@ -21,33 +21,59 @@
 {% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
 <form id="clockform" method=post>
 
-	{{ render_switch(cform.calibrating) }} 
-	
+	<table>
+	<td>{{ render_switch(cform.calibrating) }} </td>
 	{% if cform.calibrating.data %}
-	<table cellspacing="0" class='{{ class }}'>
-		<tr>
-			{{ render_field_wol(cform.hh) }}
-			{{ render_field_wol(cform.mm) }}
-			{{ render_field_wol(cform.ww) }}
-		</tr>
-		<tr>
-			{{ render_field_wol(cform.set_hh) }}
-			{{ render_field_wol(cform.set_mm) }}
-			{{ render_field_wol(cform.set_ww) }}
-		</tr>
-		<tr>
-			{{ render_field_wol(cform.sync_hh) }}
-			{{ render_field_wol(cform.sync_mm) }}
-			{{ render_field_wol(cform.sync_ww) }}
-		</tr>
-			{{ render_field_wol(cform.cal_hh) }}
-			{{ render_field_wol(cform.cal_mm) }}
-			{{ render_field_wol(cform.cal_ww) }}
-		</tr>
+	<td>Calibration mode is <font color="red">ON</font></td>
+	{% else %}
+	<td>Calibration mode is <font color="green">OFF</font></td>
+	{% endif %}
+	</table>
+	{% if cform.calibrating.data %}
+	<p>
+	<table border=3 bordercolor=red width=300>
+		<td>
+			You are in calibration mode. The clock will not show current time until you exit this mode.
+		</td>
+	</table>
+	<p>
+	<table border=3 bordercolor=red  width=300>
+		<td width=300 align=center>
+			<table cellspacing="0" class='clock-btn' align=center>
+				<tr height=10></tr>
+				<tr align=center>
+					{{ render_field_wol(cform.hh) }}
+					{{ render_field_wol(cform.mm) }}
+					{{ render_field_wol(cform.ww) }}
+				</tr>
+				<tr align=center>
+					{{ render_field_wol(cform.set_hh) }}
+					{{ render_field_wol(cform.set_mm) }}
+					{{ render_field_wol(cform.set_ww) }}
+				</tr>
+				<tr align=center>
+					{{ render_field_wol(cform.sync_hh) }}
+					{{ render_field_wol(cform.sync_mm) }}
+					{{ render_field_wol(cform.sync_ww) }}
+				</tr>
+				<tr  align=center>
+					{{ render_field_wol(cform.cal_hh) }}
+					{{ render_field_wol(cform.cal_mm) }}
+					{{ render_field_wol(cform.cal_ww) }}
+				</tr>
+				<tr height=10></tr>
+			</table>
+		</td>
 	</table>
 	{% else %}
 	<p>
-		In order to control the Flip Clock, enter calibration mode. Clock will stop showing current time during calibration.
+	<table border=3 bordercolor=green width=300>
+		<td>
+			In order to control the Flip Clock, enter calibration mode. Clock will stop showing current time during calibration.
+		</td>
+	</table>
 	</p>
 	{% endif %}
+	
+	
 </form>
