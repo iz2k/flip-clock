@@ -1,0 +1,43 @@
+<doctype html>
+<head>
+	<title>Config</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+{% from "_navbar.html" import render_navbar %}
+	{{ render_navbar('config') }}
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class=flashes>
+	{% for message in messages %}
+		<li>{{ message }}</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+{% endwith %}
+
+{% from "_formhelpers.html" import render_field_raw, render_field, render_field_wol, render_switch %}
+<h2>FlipClock configuration:</h2>
+<form method=post>
+	<table cellspacing="0" class='formtable'>
+		<td>
+			<table>
+				<tr>
+					{{ render_field(cform.darksky_secret)}}
+				</tr>
+				<tr>
+					{{ render_field(cform.spotify_user) }}
+				</tr>
+				<tr>
+					{{ render_field(cform.spotify_pass) }}
+				</tr>
+			</table>
+		</td>
+		<td>
+		<table width=50>
+			<td height=75>{{ render_field_raw(cform.save) }}</td>
+		</table>
+		</td>
+	</table>
+</form>

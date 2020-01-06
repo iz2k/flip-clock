@@ -8,6 +8,7 @@ class sound:
 	
 	mute = False
 	volume_step = 2
+	say = None
 	
 	def __init__(self):
 		self.device = alsaaudio.PCM(device='default')		
@@ -85,7 +86,7 @@ class sound:
 		self.update_volume()
 		return self.mute
 		
-	def say_text(self, text, lang='en'):
+	def say_text(self, text, lang='en', wait=False):
 		raw_cmd='mplayer -ao alsa -af volume=13 -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob'
 		raw_cmd+='&tl='
 		raw_cmd+=lang
@@ -93,5 +94,13 @@ class sound:
 		raw_cmd+= text
 		raw_cmd+='"'
 		
-		cmd = shlex.split(raw_cmd)
-		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+		cmd = shlex.split(raw_cmd)		
+		if wait:
+			subprocess.call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+		else:
+			if(self.say is not None):
+				self.say.terminate()
+				self.say.wait()
+			self.say=subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+			
+			

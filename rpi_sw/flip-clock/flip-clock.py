@@ -59,14 +59,14 @@ def ctrl_sw_long():
 	if status == 'idle':
 		sound.play('on')
 		status='spotify'
-		sound.say_text('Spotify', lang='es')
+		sound.say_text('Spotify', lang='es', wait=True)
 		time.sleep(1)
 		spotify.play_spotify()
 	elif status == 'spotify':
 		sound.play('on')
 		status = 'radio'
 		spotify.kill_spotify()
-		sound.say_text('Radio', lang='es')
+		sound.say_text('Radio', lang='es', wait=True)
 		time.sleep(1)
 		radio.play_radio()
 	elif status == 'radio':

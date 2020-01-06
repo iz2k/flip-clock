@@ -109,7 +109,8 @@ input[type=submit][value=New]:hover {
   color: white;
 }
 
-input[type=submit][value=Update] {
+input[type=submit][value=Update],
+input[type=submit][value=Save] {
   width: 100;
   height: 100%;
   background-color: #98a5fa;
@@ -118,7 +119,8 @@ input[type=submit][value=Update] {
   border-radius: 4px;
   cursor: pointer;
 }
-input[type=submit][value=Update]:hover {
+input[type=submit][value=Update]:hover,
+input[type=submit][value=Save]:hover {
   background-color: #203dfa;
   color: white;
 }
