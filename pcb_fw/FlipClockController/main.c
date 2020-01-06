@@ -211,7 +211,7 @@ void main(void)
                         stepper_HH_stop();
                         sync_delay_HH=0;
                         current_HH = cal_HH;
-                        status = StatusRun;
+                        status = StatusStop;
                     }else{
                         stepper_HH_move();
                         nsteps_HH++;
@@ -232,7 +232,7 @@ void main(void)
                         stepper_MM_stop();
                         sync_delay_MM=0;
                         current_MM = cal_MM;
-                        status = StatusRun;
+                        status = StatusStop;
                     }else{
                         stepper_MM_move();
                         nsteps_MM++;
