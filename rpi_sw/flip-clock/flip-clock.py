@@ -10,8 +10,9 @@ from lib import iz2k_led
 from lib import iz2k_clock
 from lib import iz2k_alarmclock
 from lib import iz2k_config
-from frontend import iz2k_frontend
+from frontend import iz2k_frontend, config_models
 from frontend.app import frontendqueue
+import os
 
 # Define CTRL callbacks
 def vol_rotary_callback(direction):
@@ -85,14 +86,16 @@ def snooze_sw_long():
 
 
 # Load config
-#conf = iz2k_config.configuration()
+rundir = os.path.dirname(os.path.realpath(__file__))
+conf = config_models.load_config(rundir + '/config/config.xml')
+
 status='idle'
 
 # Create audio controler
 sound = iz2k_audio.sound()
 
 # Create spotify controller
-spotify = iz2k_spotify.spotify(sound=sound)
+spotify = iz2k_spotify.spotify(sound=sound, user=conf.spotify_user, pwd=conf.spotify_pass)
 
 # Create radio controller
 radio = iz2k_radio.radio(sound=sound)
@@ -119,7 +122,7 @@ ctrl_switch = iz2k_io.switch(I=4, G=17)
 ctrl_switch.setup_switch(long_press=True, sw_short_callback=snooze_sw_short, sw_long_callback=snooze_sw_long)
 
 # Create clock controller
-clock = iz2k_clock.clock()
+clock = iz2k_clock.clock(darksky=conf.darksky_secret)
 
 # Create alarmclock controller
 alarmclock=iz2k_alarmclock.alarmclock(sound, spotify, radio, strip, clock)

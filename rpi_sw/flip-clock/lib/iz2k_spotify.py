@@ -8,11 +8,13 @@ from frontend import spotify_models
 
 class spotify:
 
-	def __init__(self, sound):
+	def __init__(self, sound, user, pwd):
 		self.reload_xml()
 		self.current_item = 0
 		self.tizonia = None
 		self.sound=sound
+		self.user = user
+		self.pwd = pwd
 
 	def reload_xml(self):
 		print('[spotify] Loading spotitem list')
@@ -48,7 +50,9 @@ class spotify:
 
 		print("[spotify] Playing track: " + URI)
 		# Play track
-		cmd=shlex.split('tizonia --spotify-track-id ' + URI)
+		raw_cmd = 'tizonia --spotify-user "' + self.user + '" --spotify-password "' + self.pwd + '"'
+		raw_cmd += ' --spotify-track-id ' + URI
+		cmd=shlex.split(raw_cmd)
 		subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
 	def play_list(self, URI, shuffle=False):
@@ -58,10 +62,12 @@ class spotify:
 
 		print("[spotify] Playing playlist: " + URI)
 		# Play playlist
-		raw_cmd = 'tizonia --spotify-playlist-id ' + URI
+		raw_cmd = 'tizonia --spotify-user "' + self.user + '" --spotify-password "' + self.pwd + '"'
+		raw_cmd += ' --spotify-playlist-id ' + URI
 		if shuffle:
 			raw_cmd += ' -s'
 		cmd=shlex.split(raw_cmd)
+		
 		self.tizonia = subprocess.Popen(cmd,stdin=subprocess.PIPE, 
 						stdout=subprocess.DEVNULL, 
 						stderr=subprocess.STDOUT, 

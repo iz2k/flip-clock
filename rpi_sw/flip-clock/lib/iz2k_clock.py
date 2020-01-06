@@ -16,10 +16,11 @@ class clock:
 	last_ss = 0
 	next_ww = WEATHER_UPDATE_RATE
 	
-	def __init__(self):
+	def __init__(self, darksky):
 		self.comport = Serial('/dev/ttyS0', baudrate=115200)
 		self.forecast = None
 		self.calibrating=False
+		self.darksky_secret = darksky
 		clockcalibration.put(False)
 
 	def calibration(self, status):
@@ -83,7 +84,7 @@ class clock:
 	def update_weather(self):
 		# Get weather
 		print("Updating weather:")
-		darksky = DarkSky('***REMOVED***')
+		darksky = DarkSky(self.darksky_secret)
 		self.forecast = darksky.get_forecast(43.312691, -1.993332, lang='es')
 
 		print(" >> Summary: ", self.forecast.currently.summary)
