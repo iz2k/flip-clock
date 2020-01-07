@@ -39,18 +39,18 @@ The current version of the PCB can handle up to two flip digits at the same time
 |![](https://user-images.githubusercontent.com/57298545/71909251-eae18300-316f-11ea-97d6-9f295ecb5744.png) | ![](https://user-images.githubusercontent.com/57298545/71839735-2458b680-30bc-11ea-927b-b251d45d2cdc.png)|
 
 ### Subparts
-1. MSP430FR2433 MCU
-2. INA333 comparators
-3. ULN2003 drivers
+1. <a href="http://www.ti.com/product/MSP430FR2433">MSP430FR2433 MCU</a>
+2. <a href="http://www.ti.com/product/INA333?keyMatch=INA333&tisearch=Search-EN-everything&usecase=part-number">INA333 comparators</a>
+3. <a href="https://www.ti.com/product/ULN2003A?utm_source=google&utm_medium=cpc&utm_campaign=app-null-null-GPN_EN-cpc-pf-google-wwe&utm_content=ULN2003A&ds_k=ULN2003A&DCM=yes&gclid=Cj0KCQiA9dDwBRC9ARIsABbedBNLJmCuJJccQ0TU_6kyqkmjuiaOIJmoF_R1Iqcqjsfj1315j4ct5KgaAqUfEALw_wcB&gclsrc=aw.ds">ULN2003A drivers</a>
 
 ## 3D printed cover
 ![](https://user-images.githubusercontent.com/57298545/71839981-af39b100-30bc-11ea-9f0e-0c204987276a.png)
 
 ### Subparts
-1. Top cover
-2. Bottom cover
-3. Front cover
-4. Back cover
+1. 3D printed top cover
+2. 3D printed bottom cover
+3. 3D printed front cover
+4. 3D printed back cover
 
 ## Rotary encoders
 For the user interface two rotary encoders have been used. The used encoders can detect steps in both directions, and include a built-in switch. One of the encoders is used to control the volume (up/down/mute), whereas the other encoder controls the audio device (FM Radio/Spotify/OFF)
@@ -62,31 +62,68 @@ For the user interface two rotary encoders have been used. The used encoders can
 ### Subparts
 1. 3D printed volume wheel
 2. 3D printed control wheel
-3. TT EN11-HSM1AF15 Rotary Encoders
+3. <a href="https://www.mouser.es/ProductDetail/BI-Technologies-TT-Electronics/EN11-HSM1AF15?qs=u1MaZ2%2F4xgsleMatSs8Sqg==">TT EN11-HSM1AF15</a> Rotary Encoders
 
 
 ## Snooze bar
-A snooze bar is included on top of the FlipClock device. This bar can be used to trigger the nightlight by default, or to stop/snooze the alarm when it has been triggered. Tactile switches (<a hlink="https://octopart.com/evq-q2s03w-panasonic-1199659">EVQ-Q2S03W</a>) are placed under the bar to detect when it is pressed.
+A snooze bar is included on top of the FlipClock device. This bar can be used to trigger the nightlight by default, or to stop/snooze the alarm when it has been triggered. Tactile switches are placed under the bar to detect when it is pressed.
 
 | Bar | Switch |
 | --- | --- |
-|![image](https://user-images.githubusercontent.com/57298545/71840138-ffb10e80-30bc-11ea-9305-3af52d365865.png) | ![image](https://user-images.githubusercontent.com/57298545/71915270-ad82f280-317b-11ea-9301-1a9b3560ee06.png) |
+|![bar](https://user-images.githubusercontent.com/57298545/71840138-ffb10e80-30bc-11ea-9305-3af52d365865.png) | ![switch](https://user-images.githubusercontent.com/57298545/71915944-1f0f7080-317d-11ea-9247-6284e7399dad.png)
+ |
+
+### Subparts
+1. 3D printed snooze bar
+2. <a hlink="https://octopart.com/evq-q2s03w-panasonic-1199659">EVQ-Q2S03W</a> tactile switches
+
 
 ## NeoPixel RGBW Stick
+Two NeoPixel RGBW LED sticks have been included in the front of the FlipClock in order to provide nightlight and light-sign functions to the device.
 
+![neopixel](https://user-images.githubusercontent.com/57298545/71915786-c5a74180-317c-11ea-8382-9a2c862fb766.png)
 
-![neopixel](https://user-images.githubusercontent.com/57298545/71912677-3e56cf80-3176-11ea-8d7b-60bb79011de1.jpg | width=50%)
+### Subparts
+1. <a href="https://www.adafruit.com/product/2868">NeoPixel RGBW Stick</a>
 
 
 
 
 ## 3W Speakers
+![image](https://user-images.githubusercontent.com/57298545/71917028-78789f00-317f-11ea-9d36-5b1e801ca90e.png)
+
+### Subparts
+1. <a href="https://www.adafruit.com/product/1669">Stereo Enclosed Speaker Set - 3W 4 Ohm</a>
 
 ## FM radio tunner (RTL-SDR)
 
+| RTL-SDR dongle | FM antenna |
+| --- | --- |
+|![image](https://user-images.githubusercontent.com/57298545/71916693-ca6cf500-317e-11ea-9ba9-f5a19fb1d1fc.png)|![image](https://user-images.githubusercontent.com/57298545/71916614-9db8dd80-317e-11ea-92c9-331ff1a74de6.png)|
+
+### Subparts
+1. <a href="https://www.amazon.es/gp/product/B013Q94CT6/ref=ppx_yo_dt_b_asin_title_o06_s00?ie=UTF8&psc=1">RTL-SDR dongle</a>
+2. <a href="https://www.amazon.es/gp/product/B07CJYRWXQ/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1">FM antenna</a>
+
+
 ## Raspberry Pi 3 A+
+|Raspberry Pi 3 Model A+|Adafruit I2S 3W Stereo Speaker Bonnet|
+|--|--|
+|![image](https://user-images.githubusercontent.com/57298545/71917662-da85d400-3180-11ea-85ec-e5f024e5f510.png)|![image](https://user-images.githubusercontent.com/57298545/71917730-0dc86300-3181-11ea-9dab-7e09cda9c585.png)|
+
+### Subparts
+1. <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/">RPI3 A+</a>
+2. <a href="https://www.adafruit.com/product/3346">Adafruit I2S 3W Stereo Speaker Bonnet</a>
+
 
 ## Power Supply
+|Power Supply Module| PSM Housing|
+|--|--|
+|![image](https://user-images.githubusercontent.com/57298545/71917384-37cd5580-3180-11ea-8340-a72870a0f2ce.png)|![image](https://user-images.githubusercontent.com/57298545/71917600-bcb86f00-3180-11ea-9bb1-ffbf252b2a0e.png)|
+
+### Subparts
+1. <a href="https://www.digikey.com/product-detail/en/mean-well-usa-inc/PS-05-5/1866-5411-ND/7705819">PS-05-5</a> power supply module
+2. 3D printed housing
 
 # Wiring
 NeoPixel DIN 	>> RPI MOSI
