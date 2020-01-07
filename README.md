@@ -3,6 +3,7 @@
 The Flip-Clock is an old stylish, classic alarm clock with up to date features, such as automatic time adjustment, weather forecast, FM radio or Spotify playback. The device consists of three 3D printed flip digits, a  PCB with integrated drivers for the digit controlling stepper motors and a Raspberry Pi 3 A+ with 3W speakers to run the main code.
 
 All the mechanics and electronics are mounted within an 3D printed elegant cover. Additionally, a snoozer bar, two rotary encoders and a RGBW LED strip are included for the user interface.
+
 <center>
 <img src="https://user-images.githubusercontent.com/57298545/71907740-ef586c80-316c-11ea-82d4-6763a5d89800.png">
 </center>
