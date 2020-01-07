@@ -23,6 +23,10 @@ class clock:
 		self.darksky_secret = darksky
 		clockcalibration.put(False)
 
+	def set_secret(self, darksky):
+		print('[clock] DarkSky secret set.')
+		self.darksky_secret = darksky
+
 	def calibration(self, status):
 		if status==True and self.calibrating==False:
 			print('[clock] Calibration enabled')

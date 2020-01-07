@@ -4,7 +4,7 @@
     <hour>7</hour>
     <minute>10</minute>
     <periodic>
-      <enable>True</enable>
+      <enable>False</enable>
       <monday>True</monday>
       <tuesday>True</tuesday>
       <wednesday>True</wednesday>
@@ -38,7 +38,7 @@
     <hour>19</hour>
     <minute>42</minute>
     <periodic>
-      <enable>True</enable>
+      <enable>False</enable>
       <monday>True</monday>
       <tuesday>True</tuesday>
       <wednesday>True</wednesday>

@@ -84,12 +84,16 @@ def snooze_sw_long():
 	print("[UI] SNOOZE pressed LONG")
 	alarmclock.snooze_long()
 
+def load_config():
+	# Load config
+	rundir = os.path.dirname(os.path.realpath(__file__))
+	return config_models.load_config(rundir + '/config/config.xml')
 
-# Load config
-rundir = os.path.dirname(os.path.realpath(__file__))
-conf = config_models.load_config(rundir + '/config/config.xml')
-
+# Set initial status
 status='idle'
+
+# Load config (credentials...)
+conf = load_config()
 
 # Create audio controler
 sound = iz2k_audio.sound()
@@ -145,6 +149,10 @@ while True:
 			spotify.reload_xml()
 		elif frontend_msg == 'alarm_update':
 			alarmclock.reload_xml()
+		elif frontend_msg == 'config_update':
+			conf = load_config()
+			spotify.set_credentials(user=conf.spotify_user, pwd=conf.spotify_pass)
+			clock.set_secret(darksky=conf.darksky_secret)
 		elif frontend_msg == 'clock-calibration-on':
 			clock.calibration(True)
 		elif frontend_msg == 'clock-calibration-off':

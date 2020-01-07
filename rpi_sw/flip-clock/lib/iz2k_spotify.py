@@ -16,6 +16,11 @@ class spotify:
 		self.user = user
 		self.pwd = pwd
 
+	def set_credentials(self, user, pwd):
+		print('[spotify] Credentials set.')
+		self.user = user
+		self.pwd = pwd
+
 	def reload_xml(self):
 		print('[spotify] Loading spotitem list')
 		# Load spotitems from XML

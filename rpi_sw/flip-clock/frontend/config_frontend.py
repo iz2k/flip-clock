@@ -22,7 +22,7 @@ def config_index():
 			else:
 				cfg_new.spotify_pass = reqform.spotify_pass.data
 			save_config(config=cfg_new, filename=rundir + '/../config/config.xml')
-			#frontendqueue.put('config_update')
+			frontendqueue.put('config_update')
 
 	# Load stored config object
 	cfg = load_config(rundir + '/../config/config.xml')
