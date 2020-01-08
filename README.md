@@ -109,7 +109,8 @@ Two NeoPixel RGBW LED sticks have been included in the front of the FlipClock in
 ## Raspberry Pi 3 A+
 |Raspberry Pi 3 Model A+|Adafruit I2S 3W Stereo Speaker Bonnet|
 |--|--|
-|![image](https://user-images.githubusercontent.com/57298545/71917662-da85d400-3180-11ea-85ec-e5f024e5f510.png)|![image](https://user-images.githubusercontent.com/57298545/71917730-0dc86300-3181-11ea-9dab-7e09cda9c585.png)|
+|![image](https://user-images.githubusercontent.com/57298545/71917662-da85d400-3180-11ea-85ec-e5f024e5f510.png)|![image](https://user-images.githubusercontent.com/57298545/71960646-ce882980-31f5-11ea-9f44-48df297365e6.png)
+|
 
 ### Subparts
 1. <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/">RPI3 A+</a>
