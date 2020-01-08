@@ -174,4 +174,15 @@ Control Encoder<sup>1</sup> connection:
 | Control Encoder | ROT1 | GPIO 16 | RPI3 |
 | Control Encoder | GND | GPIO 13 | RPI3 |
 
+Flip-Clock-Controller PCB:
+
+|Subpart | PIN | PIN | Subpart |
+|--|--|--|--|
+|RPI3 | 3.3V | 3.3V | Flip-Clock-Controller PCB 1 (HHMM)|
+|RPI3 | 3.3V | 3.3V | Flip-Clock-Controller PCB 2 (WW)|
+|RPI3 | TX | RX | Flip-Clock-Controller PCB 1 (HHMM)|
+|Flip-Clock-Controller PCB 1 (HHMM) | TX | RX | Flip-Clock-Controller PCB 2 (WW)|
+|Flip-Clock-Controller PCB 2 (WW) | TX | RX | RPI3|
+
+
 1: For ease of connectivity, all pins of rotary encoders are routed to GPIOs. These GPIOs will be configured as required with pull resistors or fixed voltages via software.
