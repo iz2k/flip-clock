@@ -16,16 +16,16 @@ Each flip digit consists of a support structure with two bearings. The axle is p
 
 ### Subparts
 
-1.Support structure
-2.Bearings (<a href="https://www.amazon.es/gp/product/B07CWLGNJ5/ref=ppx_yo_dt_b_asin_title_o07_s01?ie=UTF8&psc=1">623-2RS</a>)
-3.Axle
-4.Flap holders
-5.Flaps
-6.Gears
-7.Stepper motor (<a href="https://www.amazon.es/gp/product/B07LCFKJB8/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1">28BYJ-48</a>)
-8.IR transmitter (<a href="https://www.amazon.es/gp/product/B07F3W2SP4/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1">IR diode</a>)
-9.IR receiver (<a href="https://www.amazon.es/gp/product/B07F3W2SP4/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1">IR photodiode</a>)
-10.Limit switch (<a href="https://www.amazon.es/gp/product/B07GKS9XC7/ref=ppx_yo_dt_b_asin_title_o05_s00?ie=UTF8&psc=1">CLW1093</a>)
+1. Support structure
+2. Bearings (<a href="https://www.amazon.es/gp/product/B07CWLGNJ5/ref=ppx_yo_dt_b_asin_title_o07_s01?ie=UTF8&psc=1">623-2RS</a>)
+3. Axle
+4. Flap holders
+5. Flaps
+6. Gears
+7. Stepper motor (<a href="https://www.amazon.es/gp/product/B07LCFKJB8/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1">28BYJ-48</a>)
+8. IR transmitter (<a href="https://www.amazon.es/gp/product/B07F3W2SP4/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1">IR diode</a>)
+9. IR receiver (<a href="https://www.amazon.es/gp/product/B07F3W2SP4/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1">IR photodiode</a>)
+10. Limit switch (<a href="https://www.amazon.es/gp/product/B07GKS9XC7/ref=ppx_yo_dt_b_asin_title_o05_s00?ie=UTF8&psc=1">CLW1093</a>)
 
 ![](https://user-images.githubusercontent.com/57298545/71909685-cfc34300-3170-11ea-8009-0059fa54a33f.png)
 
@@ -71,7 +71,7 @@ A snooze bar is included on top of the FlipClock device. This bar can be used to
 | Bar | Switch |
 | --- | --- |
 |![bar](https://user-images.githubusercontent.com/57298545/71840138-ffb10e80-30bc-11ea-9305-3af52d365865.png) | ![switch](https://user-images.githubusercontent.com/57298545/71915944-1f0f7080-317d-11ea-9247-6284e7399dad.png)
- |
+
 
 ### Subparts
 1. 3D printed snooze bar
@@ -126,21 +126,51 @@ Two NeoPixel RGBW LED sticks have been included in the front of the FlipClock in
 2. 3D printed housing
 
 # Wiring
-NeoPixel DIN 	>> RPI MOSI
-NeoPixel 5VDC	>> 5V
-NeoPixel GND	>> GND
 
-SnoozeBar_sw0	>> RPI 4
-SnoozeBar_sw1	>> RPI 17
+The correct wiring to connect the different electronics is as follows:
 
-CTRL_enc_sw0	>> RPI 5
-CTRL_enc_sw1	>> RPI 6
-CTRL_enc_rot0	>> RPI 12
-CTRL_enc_rot1	>> RPI 16
-CTRL_enc_gnd	>> RPI 13
+PSM connection:
 
-VOL_enc_sw0	>> RPI 24
-VOL_enc_sw1	>> RPI 25
-VOL_enc_rot0	>> RPI 27
-VOL_enc_rot1	>> RPI 23
-VOL_enc_gnd	>> RPI 22
+| Subpart | PIN | PIN | Subpart |
+| -- | -- | -- | --|
+| RPI3 | 5V | 5V | PSM |
+| RPI3 | GND | GND | PSM |
+
+NeoPixel connection:
+
+| Subpart | PIN | PIN | Subpart |
+| -- | -- | -- | --|
+| NeoPixel | DIN | MOSI | RPI3 |
+| NeoPixel | 5VDC | 5V | RPI3 |
+| NeoPixel | GND | GND | RPI3 |
+
+Snooze Bar connection:
+
+
+| Subpart | PIN | PIN | Subpart |
+| -- | -- | -- | --|
+| Snooze Bar | SW0 | GPIO 4 | RPI3 |
+| Snooze Bar | SW1 | GPIO 17 | RPI3 |
+
+Volume Encoder<sup>1</sup> connection:
+
+
+| Subpart | PIN | PIN | Subpart |
+| -- | -- | -- | --|
+| Volume Encoder | SW0 | GPIO 24 | RPI3 |
+| Volume Encoder | SW1 | GPIO 25 | RPI3 |
+| Volume Encoder | ROT0 | GPIO 27 | RPI3 |
+| Volume Encoder | ROT1 | GPIO 23 | RPI3 |
+| Volume Encoder | GND | GPIO 22 | RPI3 |
+
+Control Encoder<sup>1</sup> connection:
+
+| Subpart | PIN | PIN | Subpart |
+| -- | -- | -- | --|
+| Control Encoder | SW0 | GPIO 5 | RPI3 |
+| Control Encoder | SW1 | GPIO 6 | RPI3 |
+| Control Encoder | ROT0 | GPIO 12 | RPI3 |
+| Control Encoder | ROT1 | GPIO 16 | RPI3 |
+| Control Encoder | GND | GPIO 13 | RPI3 |
+
+1: For ease of connectivity, all pins of rotary encoders are routed to GPIOs. These GPIOs will be configured as required with pull resistors or fixed voltages via software.
