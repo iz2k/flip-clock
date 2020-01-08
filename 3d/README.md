@@ -15,11 +15,13 @@ However, for the other parts of the cover, PLA filament has been used for ease o
 The most important part of the design are the flip digits. Those are composed by the support structure, axle with the gears, flap-holders and the flaps themselves. Additionally, the structure includes holders for th IR transmitter, IR receiver and the synchronization limit switch.
 
 There are two different flap-holder sizes: one for 24 flaps, and another one for 60 flaps. The size of 24 is used for hours and weather flaps, whereas the size of 60 is for the minutes.
+
 ![](https://user-images.githubusercontent.com/57298545/71909685-cfc34300-3170-11ea-8009-0059fa54a33f.png)
 
 ### Flaps
 
 The flaps are quite tricky to print because of their thinness. I have found that using PLA filament and printing them in vertical position gets the best results. Note that the flaps for the 24 size flap-holders and the ones for the 60 size flap-holders are slightly different.
+
 ![image](https://user-images.githubusercontent.com/57298545/72001053-db803980-3244-11ea-8d0f-ef9015a581c6.png)
 
 Once you get the flaps printed, it's time to add the content. In my case I have drawn the numbers and the weather icons using a white painting spray. In order to get good drawings, I have designed and printed the stencils, so that you have only to insert two flaps and spray them to get the desired drawing on them. The stencil parts are also included in the repositoyry, under the `/3d/etc/stencil` directory
