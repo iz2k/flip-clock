@@ -216,7 +216,51 @@ curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 
 ## Flip-Clock software
 
+In order to run the Flip-Clock software, just copy all the files to the desired location. I used `/usr/share/flip-clock`. for ease of use, make the main file executable:
+
+````
+chmod +x flip-clock.py
+````
+
+You can also add a symbolic link to `/usr/bin` in order to make it visible to $PATH.
+
+````
+ln -s /usr/share/flip-clock/flip-clock /usr/bin/flip-clock
+````
+
+To run the software, just execute it:
+
+````
+./flip-clock
+````
+
 ### Autostart (systemd unit file)
+
+In order to make the Flip-Clock software run automatically on every boot, you can create a systemd unit file. I have included a reference unit file in the `autostart` folder.
+
+Copy the flip-clock.service file to `/etc/systemd/system/` folder:
+
+````
+sudo cp  flip-clock.service /etc/systemd/system/ flip-clock.service
+````
+
+Reload the systemctl daemon to read the new unit file.
+
+````
+sudo systemctl daemon-reload
+````
+
+Enable the flip-clock service to run on startup:
+
+````
+sudo systemctl enable flip-clock.service
+````
+
+Run the flip-clock service without rebooting:
+
+````
+sudo systemctl start flip-clock.service
+````
 
 ### Code structure
 
