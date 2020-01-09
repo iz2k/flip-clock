@@ -10,9 +10,9 @@ In order to run the Flip-Clock software on the Raspberry Pi 3 Model A+, the devi
 
 ### WPA supplicant
 
-The first parameter to set up is the WiFi connectivity. The Model A+ does not have an ethernet connector, so the connectivity to internet is provded by WiFi. The easiest way to get the wifi connection working, is to use the WPA supplicant. Basically, you need to include a file called `wpa_supplicant.conf` in the `/etc/wpa_supplicant/` folder.
+The first parameter to set up is the WiFi connectivity. The Model A+ does not have an ethernet connector, so the connectivity to internet is provded by WiFi. The easiest way to get the wifi connection working, is to use the WPA supplicant. As explained in <a href="https://howchoo.com/g/ndy1zte2yjn/how-to-set-up-wifi-on-your-raspberry-pi-without-ethernet">this</a> post, you need to include a file called `wpa_supplicant.conf` in the `/etc/wpa_supplicant/` folder.
 
-This can also be achieved connecting the SD card with Raspian to your Windows/MacOS computer and copying the `wpa_supplicant.conf` file into the FAT32 `/boot` partition. Raspian will copy the file to the correct location in the next boot (of the RPI3).
+This can also be achieved connecting the SD card with Raspian to your Windows/MacOS computer and copying the `wpa_supplicant.conf` file into the FAT32 `/boot` partition. Raspian will copy the file to the correct location in the next boot of the pi.
 
 The content of the file has to be as follows:
 
@@ -77,6 +77,37 @@ Once the hardware of the Raspberry Pi has been correctly set-up, the dependencie
 
 ### Python 3
 
+Given that the Flip-Clock software is written in python, you will need the correct interpreter. Install python 3 as follows:
+
+````
+sudo apt-get install python3
+````
+
+Additionally, you will need to install several dependencies referenced in the project using `pip3`:
+
+````
+sudo pip3 install time
+sudo pip3 install os
+sudo pip3 install datetime
+sudo pip3 install rpi_ws281x
+sudo pip3 install pigpio
+sudo pip3 install queue
+sudo pip3 install wave
+sudo pip3 install alsaaudio
+sudo pip3 install subprocess
+sudo pip3 install shlex
+sudo pip3 install darksky
+sudo pip3 install lxml 
+sudo pip3 install subprocess
+sudo pip3 install shlex
+sudo pip3 install flask
+sudo pip3 install threading
+sudo pip3 install wtforms 
+sudo pip3 install decimal
+````
+
+I may be missing some module. In case you get an error of some module missing, just install it using `pip3`.
+
 ### PiGPIO (PWM)
 
 <a href="http://abyz.me.uk/rpi/pigpio/index.html">PiGPIO</a> is a library for the Raspberry Pi which allows control of the General Purpose Input Outputs (GPIO). This library has been selected as it provides a fast response time, which is required for the rotary encoders.
@@ -104,13 +135,84 @@ to edit the root crontab and add the following line to the end. Then ctrl-o retu
 
 ### mplayer
 
+In order to play audio files, or in this case to play the audio returned by google translate for TTS purposes, install `mplayer`:
+
+````
+sudo apt-get install mplayer
+````
+
 ### SoftFM
 
-#### RTL-SDR
+In order to synthonize FM radio using the RTL-SDR stick, we will use an improved version of `rtl_fm` called `softfm`. It gets better results with poor quality radio signals. We will have to build the binary for the RPI3 ourselves, but it is quite straightforward.
+
+#### Install RTL-SDR
+
+First install the RTL-SDR library in order to have the required header files.
+
+````
+sudo apt-get install rtl-sdr
+````
+
+You can check if the RTL-SDR usb dongle is recognized as follows:
+
+````
+rtl_test
+````
+
+Yous should see something similar to this:
+
+````
+Found 1 device(s):
+  0:  Generic, RTL2832U, SN: 77771111153705700
+````
+
+
+#### Build SoftFM
+
+As explained in the <a href="https://github.com/jorisvr/SoftFM">SoftFM github repository</a>, to install SoftFM, download and unpack the source code and go to the top level directory. 
+
+First make sure you have the build tools installed:
+
+````
+sudo apt-get install libusb-1.0-0-dev
+sudo apt-get install build-essential
+````
+
+Then do like this:
+
+````
+mkdir build
+cd build
+cmake ..
+
+make
+````
+
+You can test if the generated binary works fine:
+
+````
+./softfm -f <radio-frequency-in-Hz>
+````
+
 
 ### Tizonia
+<a href="http://tizonia.org/">Tizonia</a> is a cloud music player from the Linux terminal. It supports some of the major cloud music services: Spotify, Google Play Music, SoundCloud, YouTube, Plex and Chromecast. We will use this CLI player to add playback support from Spotify. It should be straightforward to extend playback support for the other supported audio streaming platforms, but this has not been implemented for now, as I am currently a Spotify user.
+
+Install Tizonia as follows:
+
+````
+curl -kL https://github.com/tizonia/tizonia-openmax-il/raw/master/tools/install.sh | bash
+````
 
 ### Raspotify (optional)
+
+Even if Tizonia is great and allows us to stream music from spotify from code, it will not show our Flip-Clock as a Spotify device in our network. If you want to use the Flip-Clock as a smart speaker that shows as a spotify device and can be controlled by your smartphone, just install Raspotify. This is optinal, as the rest of the software does not depend on raspotify to function.
+
+To install raspotify, follow the instructions on the <a href="https://github.com/dtcooper/raspotify">Raspotify github repository</a>:
+
+````
+curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
+````
 
 ## Flip-Clock software
 
