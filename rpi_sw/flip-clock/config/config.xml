@@ -1,7 +1,7 @@
 <config>
   <cfg>
-    <darksky_secret>***REMOVED***</darksky_secret>
-    <spotify_user>***REMOVED***</spotify_user>
-    <spotify_pass>***REMOVED***</spotify_pass>
+    <darksky_secret>XXX_darksky_secret_XXX</darksky_secret>
+    <spotify_user>spotify_username</spotify_user>
+    <spotify_pass>spotify_password</spotify_pass>
   </cfg>
 </config>
