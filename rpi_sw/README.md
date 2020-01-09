@@ -264,24 +264,62 @@ sudo systemctl start flip-clock.service
 
 ### Code structure
 
+The code structure is as follows:
+
+````
+flip-clock
+ >> /config/
+    >> Configuration XML files.
+ >> /frontend/
+    >> Flask web frontend files.
+ >> /lib/
+    >> Project specific library files.
+ >> /sounds/ 
+    >> PCM format sound files.
+ >> flip-clock.py
+    >> Main program.
+````
+
 #### Main program
+
+The main program generates instances of the library classes to control the different peripherals, and keeps track of the main program flow with the user interaction. The callbacks of the rotary encoders and switches as well as the frontend event queue are read in this script to obtain the desired functionality.
 
 #### Libraries
 
+For each peripheral a project specific library has been created.
+
 ##### Clock
+
+The clock library gets the current time from the system, the weather forecast form the DarkSky API and handles the UART communication towards the FlipClockPCB accordingly.
 
 ##### Audio
 
+The audio library controls the audio of the device through alsamixer. It controls the volume and allows playing simple PCM files and converting text to audio using google translate as TTS.
+
 ##### LED
 
-##### Encoder
+The LED library controls the Neopixel sticks to generate light signaling as requested by the main program.
+
+##### IO
+
+The IO library handles the rotary encoders and switches.
 
 ##### Spotify
 
+The Spotify library handles the spotify playback through Tizonia.
+
 ##### Radio
+
+The Radio library handles the radio synthonization through SoftFM.
 
 ##### Alarm
 
+The Alarm library handles the alarm settings to trigger the corresponding events when the time comes.
+
 #### Front-end (flask)
 
+The flask based web front-end allows the user to configure the clock, radio stations, spotify playlists and alarm configurations via a web browser accesible through: `http://hostname:5000`
+
 #### Configuration files
+
+The configuration files store the configuration of the different peripherals.
