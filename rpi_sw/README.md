@@ -244,6 +244,26 @@ Copy the flip-clock.service file to `/etc/systemd/system/` folder:
 sudo cp  flip-clock.service /etc/systemd/system/ flip-clock.service
 ````
 
+The reference unit file redirects the output to syslog using the method explained <a href="https://stackoverflow.com/questions/37585758/how-to-redirect-output-of-systemd-service-to-a-file">here</a>. In order to configure syslog to handle the incoming stream, copy the `flip-clock.conf` configuration file to `/etc/rsyslog.d/`
+
+````
+sudo cp flip-clock.conf /etc/rsyslog.d/
+````
+
+Now make the log file writable by syslog:
+
+````
+chown root:adm /var/log/flip-clock.log
+````
+
+Restart rsyslog:
+
+````
+sudo systemctl restart rsyslog
+````
+
+Now the stdout/stderr of flip-clock will still be available through journalctl (`sudo journalctl -u flip-clock`) but they will also be available in `/var/log/flip-clock.log`.
+
 Reload the systemctl daemon to read the new unit file.
 
 ````
