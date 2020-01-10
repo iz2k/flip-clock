@@ -130,7 +130,7 @@ sudo crontab -e
 to edit the root crontab and add the following line to the end. Then ctrl-o return ctrl-x to exit.
 
 ````
-@reboot              /usr/local/bin/pigpiod
+@reboot              /usr/bin/pigpiod -t 0
 ````
 
 ### mplayer
