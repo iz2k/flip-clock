@@ -344,4 +344,4 @@ The flask based web front-end allows the user to configure the clock, radio stat
 
 #### Configuration files
 
-The configuration files store the configuration of the different peripherals.
+The configuration files store the configuration of the different services.
