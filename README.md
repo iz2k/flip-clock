@@ -8,6 +8,12 @@ All the mechanics and electronics are mounted within an 3D printed elegant cover
 | - | - |
 | ![left](https://user-images.githubusercontent.com/57298545/71914270-8a574380-3179-11ea-9435-57df9337c144.jpg) | ![back](https://user-images.githubusercontent.com/57298545/71914280-8d523400-3179-11ea-8c9b-37a2da5062ca.jpg) |
 
+Find additional info about each design in:
+* <a href="https://github.com/iz2k/flip-clock/tree/master/3d">3D parts</a>
+* <a href="https://github.com/iz2k/flip-clock/tree/master/pcb_hw">PCB hardware</a>
+* <a href="https://github.com/iz2k/flip-clock/tree/master/pcb_fw">PCB firmware</a>
+* <a href="https://github.com/iz2k/flip-clock/tree/master/rpi_sw">RPi3 software</a>
+
 # Parts
 
 ## 3D printed flip digits
