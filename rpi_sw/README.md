@@ -133,6 +133,8 @@ to edit the root crontab and add the following line to the end. Then ctrl-o retu
 @reboot              /usr/bin/pigpiod -t 0
 ````
 
+Note that it is necessary to use the `-t 0` argument in order to launch the `pigpio` deamon in `PWM` mode instead of the default `PCM` mode. Failing to do so will break the audio that is already using the PCM hardware.
+
 ### mplayer
 
 In order to play audio files, or in this case to play the audio returned by google translate for TTS purposes, install `mplayer`:
