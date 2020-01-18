@@ -14,6 +14,8 @@ Find additional info about each design in:
 * <a href="https://github.com/iz2k/flip-clock/tree/master/pcb_fw">PCB firmware</a>
 * <a href="https://github.com/iz2k/flip-clock/tree/master/rpi_sw">RPi3 software</a>
 
+[![Flip-Clock in action](https://res.cloudinary.com/marcomontalbano/image/upload/v1579368498/video_to_markdown/images/youtube--fy7IPMUoMU4-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/fy7IPMUoMU4 "Flip-Clock in action")
+
 # Parts
 
 ## 3D printed flip digits
