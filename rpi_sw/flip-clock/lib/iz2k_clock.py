@@ -89,38 +89,41 @@ class clock:
 		# Get weather
 		print("Updating weather:")
 		darksky = DarkSky(self.darksky_secret)
-		self.forecast = darksky.get_forecast(43.312691, -1.993332, lang='es')
+		try:
+			self.forecast = darksky.get_forecast(43.312691, -1.993332, lang='es')
 
-		print(" >> Summary: ", self.forecast.currently.summary)
-		print(" >> Icon: ", self.forecast.currently.icon)
-		print(" >> Temperature: ", self.forecast.currently.temperature)
-		print(" >> Humidity: ", self.forecast.currently.humidity)
-		print(" >> Wind Speed: ", self.forecast.currently.wind_speed)
-		print(" >> Pressure: ", self.forecast.currently.pressure)
+			print(" >> Summary: ", self.forecast.currently.summary)
+			print(" >> Icon: ", self.forecast.currently.icon)
+			print(" >> Temperature: ", self.forecast.currently.temperature)
+			print(" >> Humidity: ", self.forecast.currently.humidity)
+			print(" >> Wind Speed: ", self.forecast.currently.wind_speed)
+			print(" >> Pressure: ", self.forecast.currently.pressure)
 
-		print(' >> Current summary: ' + self.forecast.currently.summary)
-		#print(' >> Minutely summary: ' + self.forecast.minutely.summary)
-		print(' >> Hourly summary: ' + self.forecast.hourly.summary)
+			print(' >> Current summary: ' + self.forecast.currently.summary)
+			#print(' >> Minutely summary: ' + self.forecast.minutely.summary)
+			print(' >> Hourly summary: ' + self.forecast.hourly.summary)
 
-		print("Get icon index:")
-		weather_icons = {
-			"clear-day":"01",
-			"clear-night":"02",
-			"partly-cloudy-day":"03",
-			"partly-cloudy-night":"04",
-			"cloudy":"05",
-			"fog":"06",
-			"wind":"07",
-			"sleet":"08",
-			"rain":"09",
-			"snow":"10",
-		}
-		weather_icon_index=weather_icons.get(self.forecast.currently.icon)
-		print(" >> Icon index: ", weather_icon_index)
-		
-		command =  'W' + weather_icon_index + '\r'
-		print("Weather command: ", command)
-		self.comport.write(bytes(command, 'UTF-8'))
+			print("Get icon index:")
+			weather_icons = {
+				"clear-day":"01",
+				"clear-night":"02",
+				"partly-cloudy-day":"03",
+				"partly-cloudy-night":"04",
+				"cloudy":"05",
+				"fog":"06",
+				"wind":"07",
+				"sleet":"08",
+				"rain":"09",
+				"snow":"10",
+			}
+			weather_icon_index=weather_icons.get(self.forecast.currently.icon)
+			print(" >> Icon index: ", weather_icon_index)
+			
+			command =  'W' + weather_icon_index + '\r'
+			print("Weather command: ", command)
+			self.comport.write(bytes(command, 'UTF-8'))
+		except:
+			print("Exception occured during weather update")
 	
 	def forecast_currently(self):
 		if self.forecast is not None:
